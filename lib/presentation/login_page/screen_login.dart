@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:love_bites_user_app/common/widgets/widgets.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
-//import 'package:love_bites_user_app/presentation/login_page/widgets/login_widgets.dart';
 
 class ScreenLoginPage extends StatelessWidget {
   const ScreenLoginPage({super.key});
@@ -10,7 +9,7 @@ class ScreenLoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 87, 1, 1),
+      backgroundColor: Color.fromARGB(255, 33, 54, 67),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -25,7 +24,7 @@ class ScreenLoginPage extends StatelessWidget {
                         'assets/animations/Animation - 1699971445661.json',
                         height: 250,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       const Text(
@@ -37,7 +36,7 @@ class ScreenLoginPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   const Form(
@@ -70,41 +69,46 @@ class ScreenLoginPage extends StatelessWidget {
                           )),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AuthButton(),
+                      AuthButton(
+                        text: 'Login',
+                      ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 224, 224, 224),
                         height: 2,
                         width: 70,
                       ),
-                      const SmallText(text: 'Or Login with'),
+                      const SmallText(
+                        text: 'Or Login with',
+                        color: Color.fromARGB(255, 224, 224, 224),
+                      ),
                       Container(
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 224, 224, 224),
                         height: 2,
                         width: 70,
                       ),
                     ],
                   ),
-                  Row(
+                  SizedBox(
+                    height: 10,
+                  ),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.golf_course_sharp),
-                          label: SmallText(text: 'Google'))
+                      CustomGoogleButton(),
                     ],
                   ),
                   Row(
@@ -113,7 +117,10 @@ class ScreenLoginPage extends StatelessWidget {
                       const SmallText(text: 'If you are new'),
                       TextButton(
                           onPressed: () {},
-                          child: const SmallText(text: ('Create an account')))
+                          child: const SmallText(
+                            text: ('Create an account'),
+                            color: Color.fromARGB(255, 224, 224, 224),
+                          ))
                     ],
                   )
                 ]),
