@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:love_bites_user_app/common/widgets/widgets.dart';
+import 'package:love_bites_user_app/presentation/common/validators/validator.dart';
+import 'package:love_bites_user_app/presentation/common/widgets/widgets.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
+import 'package:love_bites_user_app/presentation/screens/signup_page/screen_signup.dart';
 
 class ScreenLoginPage extends StatelessWidget {
   const ScreenLoginPage({super.key});
@@ -21,7 +23,7 @@ class ScreenLoginPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Lottie.asset(
-                        'assets/animations/Animation - 1699971445661.json',
+                        'assets/animations/Kiss.json',
                         height: 250,
                       ),
                       const SizedBox(
@@ -39,22 +41,20 @@ class ScreenLoginPage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Form(
+                  Form(
                     child: Column(
                       children: [
-                        CustomInputField(
-                          hint: "Username",
-                          obscure: false,
-                          icon: Icons.account_circle_outlined,
+                        customInputField(
+                          "Username",
+                          Icons.account_circle_outlined,
+                          false,
+                          phoneValidator,
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        CustomInputField(
-                          hint: "Password",
-                          obscure: true,
-                          icon: Icons.lock,
-                        ),
+                        customInputField(
+                            "Password", Icons.lock, true, phoneValidator),
                       ],
                     ),
                   ),
@@ -72,12 +72,10 @@ class ScreenLoginPage extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AuthButton(
-                        text: 'Login',
-                      ),
+                      // authButton(context, 'Login'),
                     ],
                   ),
                   const SizedBox(
@@ -105,10 +103,10 @@ class ScreenLoginPage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CustomGoogleButton(),
+                      customGoogleButton(context),
                     ],
                   ),
                   Row(
@@ -116,7 +114,12 @@ class ScreenLoginPage extends StatelessWidget {
                     children: [
                       const SmallText(text: 'If you are new'),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (ctx) {
+                              return ScreenSignUpPage();
+                            }));
+                          },
                           child: const SmallText(
                             text: ('Create an account'),
                             color: Color.fromARGB(255, 224, 224, 224),

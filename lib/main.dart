@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:love_bites_user_app/presentation/login_page/screen_login.dart';
+import 'package:love_bites_user_app/presentation/screens/login_page/screen_login.dart';
 
 void main() {
   runApp(MyApp());
