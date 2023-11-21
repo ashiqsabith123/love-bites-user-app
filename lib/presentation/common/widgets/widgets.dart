@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 Widget customInputField(String hint, IconData icon, bool obscure,
-    String? Function(String?) validator) {
+    String? Function(String?) validator, TextEditingController controller) {
   const UnderlineInputBorder underline = UnderlineInputBorder(
       borderSide: BorderSide(color: Colors.white, width: 3),
       borderRadius: BorderRadius.all(Radius.circular(9)));
 
   return TextFormField(
+    controller: controller,
     validator: validator,
     autovalidateMode: AutovalidateMode.onUserInteraction,
     obscureText: obscure,
@@ -28,11 +29,10 @@ Widget customInputField(String hint, IconData icon, bool obscure,
   );
 }
 
-Widget authButton(BuildContext context, String text, GlobalKey<FormState> key) {
+Widget authButton(BuildContext context, String text, GlobalKey<FormState> key,
+    Function() onpressed) {
   return ElevatedButton(
-    onPressed: () {
-      key.currentState!.validate();
-    },
+    onPressed: onpressed,
     style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 10,

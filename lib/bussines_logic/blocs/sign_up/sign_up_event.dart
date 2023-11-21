@@ -3,6 +3,6 @@ part of 'sign_up_bloc.dart';
 @freezed
 class SignUpEvent with _$SignUpEvent {
   const factory SignUpEvent.signUpLoading() = SignUpLoading;
-  const factory SignUpEvent.userSignUp({required SignUpModel signUpModel}) =
-      UserSignUp;
+  const factory SignUpEvent.sendOtp({required SignUpModel signUpModel}) =
+      SendOtp;
 }

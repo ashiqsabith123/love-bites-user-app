@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
+import 'package:love_bites_user_app/bussines_logic/blocs/sign_up/sign_up_bloc.dart';
+import 'package:love_bites_user_app/data/models/sign_up_model/sign_up_model.dart';
+import 'package:love_bites_user_app/data/models/sign_up_otp_model/signup_otp_model.dart';
 import 'package:love_bites_user_app/presentation/common/validators/validator.dart';
 import 'package:love_bites_user_app/presentation/common/widgets/widgets.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
 import 'package:love_bites_user_app/presentation/screens/login_page/screen_login.dart';
 
 class ScreenSignUpPage extends StatelessWidget {
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   ScreenSignUpPage({super.key});
 
@@ -27,42 +37,54 @@ class ScreenSignUpPage extends StatelessWidget {
                   key: _formKey,
                   child: Column(
                     children: [
-                      customInputField('Fullname',
-                          Icons.account_circle_outlined, false, nameValidator),
+                      customInputField(
+                          'Fullname',
+                          Icons.account_circle_outlined,
+                          false,
+                          nameValidator,
+                          fullNameController),
                       const SizedBox(
                         height: 10,
                       ),
                       customInputField('Phone Number', Icons.phone_android,
-                          false, phoneValidator),
+                          false, phoneValidator, phoneController),
                       const SizedBox(
                         height: 10,
                       ),
                       customInputField('Username', Icons.co_present_outlined,
-                          false, userNameValidator),
+                          false, userNameValidator, userNameController),
                       const SizedBox(
                         height: 10,
                       ),
-                      customInputField(
-                        'Password',
-                        Icons.lock_open,
-                        false,
-                        paswwordValidator,
-                      ),
+                      customInputField('Password', Icons.lock_open, false,
+                          paswwordValidator, passwordController),
                       const SizedBox(
                         height: 10,
                       ),
-                      customInputField(
-                        'Confirm Password',
-                        Icons.lock_outline,
-                        false,
-                        paswwordValidator,
-                      ),
+                      customInputField('Confirm Password', Icons.lock_outline,
+                          false, paswwordValidator, passwordConfirmController),
                     ],
                   )),
               const SizedBox(
                 height: 30,
               ),
-              authButton(context, 'Sign Up', _formKey),
+              BlocBuilder<SignUpBloc, SignUpState>(
+                builder: (context, state) {
+                  if (state.isLoading) {
+                    return LoadingAnimationWidget.inkDrop(
+                      color: Colors.white,
+                      size: 25,
+                    );
+                  }
+                  return authButton(context, 'Sign Up', _formKey, () {
+                    if (_formKey.currentState!.validate()) {
+                      context
+                          .read<SignUpBloc>()
+                          .add(SendOtp(signUpModel: SignUpModel()));
+                    }
+                  });
+                },
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -97,7 +119,7 @@ class ScreenSignUpPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (ctx) {
-                          return const ScreenLoginPage();
+                          return ScreenLoginPage();
                         }));
                       },
                       child: const SmallText(

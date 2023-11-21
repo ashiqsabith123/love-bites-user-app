@@ -7,9 +7,10 @@ class SignUpState with _$SignUpState {
   }) = _SignUpState;
 
   factory SignUpState.initial() => const SignUpState(isLoading: false);
-  factory SignUpState.signUpLoadingState() =>
-      const SignUpState(isLoading: true);
 
-  factory SignUpState.signUpResponseState({required SignUpModel signUpModel}) =>
-      const SignUpState(isLoading: false);
+  factory SignUpState.signUpLoadingState() =>  const SignUpState(isLoading: true);
+
+  factory SignUpState.signUpResponseState({required SignUpModel signUpModel}) => const SignUpState(isLoading: false);
+
+  factory SignUpState.sendOtpResponseState({required SignUpOtpResponseModel signupOtpResponseModel}) => const SignUpState(isLoading: true);
 }

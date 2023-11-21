@@ -8,7 +8,7 @@ class SignUpModel {
   String? fullname;
 
   @JsonKey(name: 'phone')
-  int? phone;
+  String? phone;
 
   @JsonKey(name: 'username')
   String? username;

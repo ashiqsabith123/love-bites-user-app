@@ -19,38 +19,38 @@ mixin _$SignUpEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() signUpLoading,
-    required TResult Function(SignUpModel signUpModel) userSignUp,
+    required TResult Function(SignUpModel signUpModel) sendOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? signUpLoading,
-    TResult? Function(SignUpModel signUpModel)? userSignUp,
+    TResult? Function(SignUpModel signUpModel)? sendOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signUpLoading,
-    TResult Function(SignUpModel signUpModel)? userSignUp,
+    TResult Function(SignUpModel signUpModel)? sendOtp,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SignUpLoading value) signUpLoading,
-    required TResult Function(UserSignUp value) userSignUp,
+    required TResult Function(SendOtp value) sendOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignUpLoading value)? signUpLoading,
-    TResult? Function(UserSignUp value)? userSignUp,
+    TResult? Function(SendOtp value)? sendOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignUpLoading value)? signUpLoading,
-    TResult Function(UserSignUp value)? userSignUp,
+    TResult Function(SendOtp value)? sendOtp,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +113,7 @@ class _$SignUpLoadingImpl implements SignUpLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() signUpLoading,
-    required TResult Function(SignUpModel signUpModel) userSignUp,
+    required TResult Function(SignUpModel signUpModel) sendOtp,
   }) {
     return signUpLoading();
   }
@@ -122,7 +122,7 @@ class _$SignUpLoadingImpl implements SignUpLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? signUpLoading,
-    TResult? Function(SignUpModel signUpModel)? userSignUp,
+    TResult? Function(SignUpModel signUpModel)? sendOtp,
   }) {
     return signUpLoading?.call();
   }
@@ -131,7 +131,7 @@ class _$SignUpLoadingImpl implements SignUpLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signUpLoading,
-    TResult Function(SignUpModel signUpModel)? userSignUp,
+    TResult Function(SignUpModel signUpModel)? sendOtp,
     required TResult orElse(),
   }) {
     if (signUpLoading != null) {
@@ -144,7 +144,7 @@ class _$SignUpLoadingImpl implements SignUpLoading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SignUpLoading value) signUpLoading,
-    required TResult Function(UserSignUp value) userSignUp,
+    required TResult Function(SendOtp value) sendOtp,
   }) {
     return signUpLoading(this);
   }
@@ -153,7 +153,7 @@ class _$SignUpLoadingImpl implements SignUpLoading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignUpLoading value)? signUpLoading,
-    TResult? Function(UserSignUp value)? userSignUp,
+    TResult? Function(SendOtp value)? sendOtp,
   }) {
     return signUpLoading?.call(this);
   }
@@ -162,7 +162,7 @@ class _$SignUpLoadingImpl implements SignUpLoading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignUpLoading value)? signUpLoading,
-    TResult Function(UserSignUp value)? userSignUp,
+    TResult Function(SendOtp value)? sendOtp,
     required TResult orElse(),
   }) {
     if (signUpLoading != null) {
@@ -177,20 +177,20 @@ abstract class SignUpLoading implements SignUpEvent {
 }
 
 /// @nodoc
-abstract class _$$UserSignUpImplCopyWith<$Res> {
-  factory _$$UserSignUpImplCopyWith(
-          _$UserSignUpImpl value, $Res Function(_$UserSignUpImpl) then) =
-      __$$UserSignUpImplCopyWithImpl<$Res>;
+abstract class _$$SendOtpImplCopyWith<$Res> {
+  factory _$$SendOtpImplCopyWith(
+          _$SendOtpImpl value, $Res Function(_$SendOtpImpl) then) =
+      __$$SendOtpImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SignUpModel signUpModel});
 }
 
 /// @nodoc
-class __$$UserSignUpImplCopyWithImpl<$Res>
-    extends _$SignUpEventCopyWithImpl<$Res, _$UserSignUpImpl>
-    implements _$$UserSignUpImplCopyWith<$Res> {
-  __$$UserSignUpImplCopyWithImpl(
-      _$UserSignUpImpl _value, $Res Function(_$UserSignUpImpl) _then)
+class __$$SendOtpImplCopyWithImpl<$Res>
+    extends _$SignUpEventCopyWithImpl<$Res, _$SendOtpImpl>
+    implements _$$SendOtpImplCopyWith<$Res> {
+  __$$SendOtpImplCopyWithImpl(
+      _$SendOtpImpl _value, $Res Function(_$SendOtpImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -198,7 +198,7 @@ class __$$UserSignUpImplCopyWithImpl<$Res>
   $Res call({
     Object? signUpModel = null,
   }) {
-    return _then(_$UserSignUpImpl(
+    return _then(_$SendOtpImpl(
       signUpModel: null == signUpModel
           ? _value.signUpModel
           : signUpModel // ignore: cast_nullable_to_non_nullable
@@ -209,22 +209,22 @@ class __$$UserSignUpImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserSignUpImpl implements UserSignUp {
-  const _$UserSignUpImpl({required this.signUpModel});
+class _$SendOtpImpl implements SendOtp {
+  const _$SendOtpImpl({required this.signUpModel});
 
   @override
   final SignUpModel signUpModel;
 
   @override
   String toString() {
-    return 'SignUpEvent.userSignUp(signUpModel: $signUpModel)';
+    return 'SignUpEvent.sendOtp(signUpModel: $signUpModel)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserSignUpImpl &&
+            other is _$SendOtpImpl &&
             (identical(other.signUpModel, signUpModel) ||
                 other.signUpModel == signUpModel));
   }
@@ -235,36 +235,36 @@ class _$UserSignUpImpl implements UserSignUp {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserSignUpImplCopyWith<_$UserSignUpImpl> get copyWith =>
-      __$$UserSignUpImplCopyWithImpl<_$UserSignUpImpl>(this, _$identity);
+  _$$SendOtpImplCopyWith<_$SendOtpImpl> get copyWith =>
+      __$$SendOtpImplCopyWithImpl<_$SendOtpImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() signUpLoading,
-    required TResult Function(SignUpModel signUpModel) userSignUp,
+    required TResult Function(SignUpModel signUpModel) sendOtp,
   }) {
-    return userSignUp(signUpModel);
+    return sendOtp(signUpModel);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? signUpLoading,
-    TResult? Function(SignUpModel signUpModel)? userSignUp,
+    TResult? Function(SignUpModel signUpModel)? sendOtp,
   }) {
-    return userSignUp?.call(signUpModel);
+    return sendOtp?.call(signUpModel);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signUpLoading,
-    TResult Function(SignUpModel signUpModel)? userSignUp,
+    TResult Function(SignUpModel signUpModel)? sendOtp,
     required TResult orElse(),
   }) {
-    if (userSignUp != null) {
-      return userSignUp(signUpModel);
+    if (sendOtp != null) {
+      return sendOtp(signUpModel);
     }
     return orElse();
   }
@@ -273,41 +273,41 @@ class _$UserSignUpImpl implements UserSignUp {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SignUpLoading value) signUpLoading,
-    required TResult Function(UserSignUp value) userSignUp,
+    required TResult Function(SendOtp value) sendOtp,
   }) {
-    return userSignUp(this);
+    return sendOtp(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignUpLoading value)? signUpLoading,
-    TResult? Function(UserSignUp value)? userSignUp,
+    TResult? Function(SendOtp value)? sendOtp,
   }) {
-    return userSignUp?.call(this);
+    return sendOtp?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignUpLoading value)? signUpLoading,
-    TResult Function(UserSignUp value)? userSignUp,
+    TResult Function(SendOtp value)? sendOtp,
     required TResult orElse(),
   }) {
-    if (userSignUp != null) {
-      return userSignUp(this);
+    if (sendOtp != null) {
+      return sendOtp(this);
     }
     return orElse();
   }
 }
 
-abstract class UserSignUp implements SignUpEvent {
-  const factory UserSignUp({required final SignUpModel signUpModel}) =
-      _$UserSignUpImpl;
+abstract class SendOtp implements SignUpEvent {
+  const factory SendOtp({required final SignUpModel signUpModel}) =
+      _$SendOtpImpl;
 
   SignUpModel get signUpModel;
   @JsonKey(ignore: true)
-  _$$UserSignUpImplCopyWith<_$UserSignUpImpl> get copyWith =>
+  _$$SendOtpImplCopyWith<_$SendOtpImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

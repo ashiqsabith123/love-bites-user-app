@@ -6,7 +6,9 @@ import 'package:love_bites_user_app/core/textstyles/style.dart';
 import 'package:love_bites_user_app/presentation/screens/signup_page/screen_signup.dart';
 
 class ScreenLoginPage extends StatelessWidget {
-  const ScreenLoginPage({super.key});
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  ScreenLoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +47,21 @@ class ScreenLoginPage extends StatelessWidget {
                     child: Column(
                       children: [
                         customInputField(
-                          "Username",
-                          Icons.account_circle_outlined,
-                          false,
-                          phoneValidator,
-                        ),
-                        SizedBox(
+                            "Username",
+                            Icons.account_circle_outlined,
+                            false,
+                            phoneValidator,
+                            userNameController),
+                       const SizedBox(
                           height: 20,
                         ),
                         customInputField(
-                            "Password", Icons.lock, true, phoneValidator),
+                          "Password",
+                          Icons.lock,
+                          true,
+                          phoneValidator,
+                          passwordController,
+                        )
                       ],
                     ),
                   ),
