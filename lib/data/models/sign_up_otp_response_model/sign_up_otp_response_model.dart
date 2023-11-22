@@ -10,6 +10,9 @@ class SignUpOtpResponseModel {
   @JsonKey(name: 'message')
   String? message;
 
+  @JsonKey(name: 'error')
+  String? error;
+
   SignUpOtpResponseModel({this.status, this.message});
 
   factory SignUpOtpResponseModel.fromJson(Map<String, dynamic> json) {

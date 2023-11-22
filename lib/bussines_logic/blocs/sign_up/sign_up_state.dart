@@ -4,13 +4,18 @@ part of 'sign_up_bloc.dart';
 class SignUpState with _$SignUpState {
   const factory SignUpState({
     required final bool isLoading,
+     SignUpOtpResponseModel? response,
   }) = _SignUpState;
 
   factory SignUpState.initial() => const SignUpState(isLoading: false);
 
-  factory SignUpState.signUpLoadingState() =>  const SignUpState(isLoading: true);
+  factory SignUpState.signUpLoadingState() =>
+      const SignUpState(isLoading: true);
 
-  factory SignUpState.signUpResponseState({required SignUpModel signUpModel}) => const SignUpState(isLoading: false);
+  factory SignUpState.signUpResponseState({required SignUpModel signUpModel}) =>
+      const SignUpState(isLoading: false);
 
-  factory SignUpState.sendOtpResponseState({required SignUpOtpResponseModel signupOtpResponseModel}) => const SignUpState(isLoading: true);
+  factory SignUpState.sendOtpResponseState(
+          {required SignUpOtpResponseModel signupOtpResponseModel}) =>
+      const SignUpState(isLoading: false,);
 }

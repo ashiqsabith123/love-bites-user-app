@@ -17,14 +17,15 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SendOtp>((event, emit) async {
       emit(SignUpState.signUpLoadingState());
 
-      SignupOtpModel? otpModel;
-
-      otpModel!.phone = event.signUpModel.phone;
+      SignupOtpModel otpModel = SignupOtpModel(phone: event.signUpModel.phone);
 
       SignUpOtpResponseModel response =
-          await sendOtpDataProvider.sendOtp(event.signUpModel);
+          await sendOtpDataProvider.sendOtp(otpModel);
 
-      emit(SignUpState.sendOtpResponseState(signupOtpResponseModel: response));
+      print(response.message);
+
+      // emit(SignUpState.sendOtpResponseState(signupOtpResponseModel: response));
+      emit(SignUpState(isLoading: false, response: response));
     });
   }
 }

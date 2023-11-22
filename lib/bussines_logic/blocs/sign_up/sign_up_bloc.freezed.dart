@@ -314,6 +314,7 @@ abstract class SendOtp implements SignUpEvent {
 /// @nodoc
 mixin _$SignUpState {
   bool get isLoading => throw _privateConstructorUsedError;
+  SignUpOtpResponseModel? get response => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpStateCopyWith<SignUpState> get copyWith =>
@@ -326,7 +327,7 @@ abstract class $SignUpStateCopyWith<$Res> {
           SignUpState value, $Res Function(SignUpState) then) =
       _$SignUpStateCopyWithImpl<$Res, SignUpState>;
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, SignUpOtpResponseModel? response});
 }
 
 /// @nodoc
@@ -343,12 +344,17 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? response = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as SignUpOtpResponseModel?,
     ) as $Val);
   }
 }
@@ -361,7 +367,7 @@ abstract class _$$SignUpStateImplCopyWith<$Res>
       __$$SignUpStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, SignUpOtpResponseModel? response});
 }
 
 /// @nodoc
@@ -376,12 +382,17 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? response = freezed,
   }) {
     return _then(_$SignUpStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as SignUpOtpResponseModel?,
     ));
   }
 }
@@ -389,14 +400,16 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SignUpStateImpl implements _SignUpState {
-  const _$SignUpStateImpl({required this.isLoading});
+  const _$SignUpStateImpl({required this.isLoading, this.response});
 
   @override
   final bool isLoading;
+  @override
+  final SignUpOtpResponseModel? response;
 
   @override
   String toString() {
-    return 'SignUpState(isLoading: $isLoading)';
+    return 'SignUpState(isLoading: $isLoading, response: $response)';
   }
 
   @override
@@ -405,11 +418,13 @@ class _$SignUpStateImpl implements _SignUpState {
         (other.runtimeType == runtimeType &&
             other is _$SignUpStateImpl &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.response, response) ||
+                other.response == response));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
+  int get hashCode => Object.hash(runtimeType, isLoading, response);
 
   @JsonKey(ignore: true)
   @override
@@ -419,11 +434,14 @@ class _$SignUpStateImpl implements _SignUpState {
 }
 
 abstract class _SignUpState implements SignUpState {
-  const factory _SignUpState({required final bool isLoading}) =
-      _$SignUpStateImpl;
+  const factory _SignUpState(
+      {required final bool isLoading,
+      final SignUpOtpResponseModel? response}) = _$SignUpStateImpl;
 
   @override
   bool get isLoading;
+  @override
+  SignUpOtpResponseModel? get response;
   @override
   @JsonKey(ignore: true)
   _$$SignUpStateImplCopyWith<_$SignUpStateImpl> get copyWith =>
