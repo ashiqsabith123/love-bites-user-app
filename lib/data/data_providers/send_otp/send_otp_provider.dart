@@ -10,6 +10,7 @@ class SendOtpDataProvider {
   Future<SignUpOtpResponseModel> sendOtp(SignupOtpModel signUpOtpModel) async {
     await Future.delayed(const Duration(seconds: 2));
     try {
+      
       final response =
           await dio.post(ApiEndPoints.sendOtp, data: signUpOtpModel.toJson());
       if (response.statusCode == 200) {
@@ -28,7 +29,8 @@ class SendOtpDataProvider {
         );
       }
     } catch (e) {
-      print(e.toString());
+      return SignUpOtpResponseModel(
+          status: 404, message: 'Something error1 $e');
     }
 
     return SignUpOtpResponseModel();

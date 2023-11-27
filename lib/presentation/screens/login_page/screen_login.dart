@@ -52,7 +52,7 @@ class ScreenLoginPage extends StatelessWidget {
                             false,
                             phoneValidator,
                             userNameController),
-                       const SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         customInputField(
@@ -71,6 +71,7 @@ class ScreenLoginPage extends StatelessWidget {
                       TextButton(
                           onPressed: () {},
                           child: const SmallText(
+                            size: 17,
                             text: 'Forgot Password',
                             color: Color.fromARGB(255, 224, 224, 224),
                           )),
@@ -97,6 +98,7 @@ class ScreenLoginPage extends StatelessWidget {
                         width: 70,
                       ),
                       const SmallText(
+                        size: 17,
                         text: 'Or Login with',
                         color: Color.fromARGB(255, 224, 224, 224),
                       ),
@@ -119,7 +121,10 @@ class ScreenLoginPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SmallText(text: 'If you are new'),
+                      const SmallText(
+                        text: 'If you are new',
+                        size: 17,
+                      ),
                       TextButton(
                           onPressed: () {
                             Navigator.of(context)
@@ -128,6 +133,7 @@ class ScreenLoginPage extends StatelessWidget {
                             }));
                           },
                           child: const SmallText(
+                            size: 17,
                             text: ('Create an account'),
                             color: Color.fromARGB(255, 224, 224, 224),
                           ))

@@ -11,11 +11,12 @@ SignUpOtpResponseModel _$SignUpOtpResponseModelFromJson(
     SignUpOtpResponseModel(
       status: json['status'] as int?,
       message: json['message'] as String?,
-    );
+    )..error = json['error'] as String?;
 
 Map<String, dynamic> _$SignUpOtpResponseModelToJson(
         SignUpOtpResponseModel instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
+      'error': instance.error,
     };

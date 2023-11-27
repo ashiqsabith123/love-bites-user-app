@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 Widget customInputField(String hint, IconData icon, bool obscure,
@@ -71,4 +72,48 @@ Widget customGoogleButton(BuildContext context) {
         'Google',
         style: TextStyle(fontSize: 18),
       ));
+}
+
+class CustomOtpField extends StatelessWidget {
+  CustomOtpField({
+    super.key,
+    required this.next,
+    required this.prev,
+  });
+  final bool next;
+  final bool prev;
+  UnderlineInputBorder underline = UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.white, width: 3),
+      borderRadius: BorderRadius.all(Radius.circular(9)));
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 68,
+      width: 50,
+      child: TextFormField(
+        decoration: InputDecoration(
+          border: underline,
+          enabledBorder: underline,
+          focusedBorder: underline,
+        ),
+        autofocus: true,
+        onChanged: (value) {
+          if (value.length == 1 && next == true) {
+            FocusScope.of(context).nextFocus();
+          }
+          if (value.length == 0 && prev == true) {
+            FocusScope.of(context).previousFocus();
+          }
+        },
+        style: const TextStyle(fontSize: 30, color: Colors.white),
+        textAlign: TextAlign.center,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(1),
+          FilteringTextInputFormatter.digitsOnly
+        ],
+      ),
+    );
+  }
 }

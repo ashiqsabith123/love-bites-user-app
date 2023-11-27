@@ -8,6 +8,7 @@ import 'package:love_bites_user_app/presentation/common/validators/validator.dar
 import 'package:love_bites_user_app/presentation/common/widgets/widgets.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
 import 'package:love_bites_user_app/presentation/screens/login_page/screen_login.dart';
+import 'package:love_bites_user_app/presentation/screens/otp_validation_page/screen_otp_validation.dart';
 import 'package:love_bites_user_app/util/alert_popup_fucntions/error_response_snackbar.dart';
 import 'package:love_bites_user_app/util/alert_popup_fucntions/success_response_snackbar.dart';
 
@@ -31,6 +32,12 @@ class ScreenSignUpPage extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
                 successResponseMessageSnackbar(
                     message: state.response!.message!));
+            Future.delayed(const Duration(seconds: 2), () {
+              Navigator.of(context)
+                  .pushReplacement(MaterialPageRoute(builder: (context) {
+                return ScreenOtpValidation(fullName: fullNameController.text,);
+              }));
+            });
           } else if (state.response?.status == 400 ||
               state.response?.status == 500 ||
               state.response?.status == 429) {
@@ -138,6 +145,7 @@ class ScreenSignUpPage extends StatelessWidget {
                         width: 70,
                       ),
                       const SmallText(
+                        size: 17,
                         text: 'Or Sign up with',
                         color: Color.fromARGB(255, 224, 224, 224),
                       ),
@@ -155,7 +163,10 @@ class ScreenSignUpPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SmallText(text: 'If you are olden'),
+                      const SmallText(
+                        text: 'If you are olden',
+                        size: 17,
+                      ),
                       TextButton(
                           onPressed: () {
                             Navigator.of(context)
@@ -164,6 +175,7 @@ class ScreenSignUpPage extends StatelessWidget {
                             }));
                           },
                           child: const SmallText(
+                            size: 17,
                             text: ('Login'),
                             color: Color.fromARGB(255, 224, 224, 224),
                           ))

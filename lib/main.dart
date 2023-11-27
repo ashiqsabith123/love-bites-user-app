@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/sign_up/sign_up_bloc.dart';
 import 'package:love_bites_user_app/presentation/screens/login_page/screen_login.dart';
+import 'package:love_bites_user_app/presentation/screens/otp_validation_page/screen_otp_validation.dart';
 
 void main() {
   runApp(MyApp());

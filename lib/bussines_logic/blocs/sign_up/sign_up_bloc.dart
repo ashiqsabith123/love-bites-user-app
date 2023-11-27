@@ -22,8 +22,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       SignUpOtpResponseModel response =
           await sendOtpDataProvider.sendOtp(otpModel);
 
-      print(response.message);
-
       // emit(SignUpState.sendOtpResponseState(signupOtpResponseModel: response));
       emit(SignUpState(isLoading: false, response: response));
     });

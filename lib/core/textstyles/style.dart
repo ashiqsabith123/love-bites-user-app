@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class BoldText extends StatelessWidget {
-  const BoldText({super.key, required this.text});
+  BoldText({super.key, required this.text, required this.color});
 
   final String text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
+        color: color,
         fontSize: 30,
         fontWeight: FontWeight.w700,
       ),
@@ -18,8 +20,9 @@ class BoldText extends StatelessWidget {
 }
 
 class SmallText extends StatelessWidget {
-  const SmallText({super.key, required this.text, this.color});
+  const SmallText({super.key, required this.text, this.color, required this.size});
 
+  final double? size;
   final String text;
 
   final Color? color;
@@ -29,7 +32,7 @@ class SmallText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 17, color: color,
+        fontSize: size, color: color,
         // fontWeight: FontWeight.w100,
       ),
     );

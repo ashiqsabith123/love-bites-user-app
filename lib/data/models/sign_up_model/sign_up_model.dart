@@ -16,6 +16,9 @@ class SignUpModel {
   @JsonKey(name: 'password')
   String? password;
 
+  @JsonKey(name: 'otp')
+  String? otp;
+
   SignUpModel({this.fullname, this.phone, this.username, this.password});
 
   factory SignUpModel.fromJson(Map<String, dynamic> json) {
