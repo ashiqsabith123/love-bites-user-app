@@ -4,7 +4,6 @@ part 'signup_otp_model.g.dart';
 
 @JsonSerializable()
 class SignupOtpModel {
-  
   @JsonKey(name: 'phone')
   String? phone;
 

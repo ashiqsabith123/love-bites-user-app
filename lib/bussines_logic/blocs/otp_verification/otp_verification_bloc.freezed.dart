@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OtpVerificationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() validate,
+    required TResult Function(SignUpModel signUpModel) validate,
     required TResult Function() resend,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? validate,
+    TResult? Function(SignUpModel signUpModel)? validate,
     TResult? Function()? resend,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? validate,
+    TResult Function(SignUpModel signUpModel)? validate,
     TResult Function()? resend,
     required TResult orElse(),
   }) =>
@@ -80,6 +80,8 @@ abstract class _$$ValidateImplCopyWith<$Res> {
   factory _$$ValidateImplCopyWith(
           _$ValidateImpl value, $Res Function(_$ValidateImpl) then) =
       __$$ValidateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SignUpModel signUpModel});
 }
 
 /// @nodoc
@@ -89,61 +91,87 @@ class __$$ValidateImplCopyWithImpl<$Res>
   __$$ValidateImplCopyWithImpl(
       _$ValidateImpl _value, $Res Function(_$ValidateImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? signUpModel = null,
+  }) {
+    return _then(_$ValidateImpl(
+      signUpModel: null == signUpModel
+          ? _value.signUpModel
+          : signUpModel // ignore: cast_nullable_to_non_nullable
+              as SignUpModel,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ValidateImpl with DiagnosticableTreeMixin implements Validate {
-  const _$ValidateImpl();
+  const _$ValidateImpl({required this.signUpModel});
+
+  @override
+  final SignUpModel signUpModel;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'OtpVerificationEvent.validate()';
+    return 'OtpVerificationEvent.validate(signUpModel: $signUpModel)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-        .add(DiagnosticsProperty('type', 'OtpVerificationEvent.validate'));
+      ..add(DiagnosticsProperty('type', 'OtpVerificationEvent.validate'))
+      ..add(DiagnosticsProperty('signUpModel', signUpModel));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ValidateImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ValidateImpl &&
+            (identical(other.signUpModel, signUpModel) ||
+                other.signUpModel == signUpModel));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, signUpModel);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ValidateImplCopyWith<_$ValidateImpl> get copyWith =>
+      __$$ValidateImplCopyWithImpl<_$ValidateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() validate,
+    required TResult Function(SignUpModel signUpModel) validate,
     required TResult Function() resend,
   }) {
-    return validate();
+    return validate(signUpModel);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? validate,
+    TResult? Function(SignUpModel signUpModel)? validate,
     TResult? Function()? resend,
   }) {
-    return validate?.call();
+    return validate?.call(signUpModel);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? validate,
+    TResult Function(SignUpModel signUpModel)? validate,
     TResult Function()? resend,
     required TResult orElse(),
   }) {
     if (validate != null) {
-      return validate();
+      return validate(signUpModel);
     }
     return orElse();
   }
@@ -181,7 +209,13 @@ class _$ValidateImpl with DiagnosticableTreeMixin implements Validate {
 }
 
 abstract class Validate implements OtpVerificationEvent {
-  const factory Validate() = _$ValidateImpl;
+  const factory Validate({required final SignUpModel signUpModel}) =
+      _$ValidateImpl;
+
+  SignUpModel get signUpModel;
+  @JsonKey(ignore: true)
+  _$$ValidateImplCopyWith<_$ValidateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -228,7 +262,7 @@ class _$ResendImpl with DiagnosticableTreeMixin implements Resend {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() validate,
+    required TResult Function(SignUpModel signUpModel) validate,
     required TResult Function() resend,
   }) {
     return resend();
@@ -237,7 +271,7 @@ class _$ResendImpl with DiagnosticableTreeMixin implements Resend {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? validate,
+    TResult? Function(SignUpModel signUpModel)? validate,
     TResult? Function()? resend,
   }) {
     return resend?.call();
@@ -246,7 +280,7 @@ class _$ResendImpl with DiagnosticableTreeMixin implements Resend {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? validate,
+    TResult Function(SignUpModel signUpModel)? validate,
     TResult Function()? resend,
     required TResult orElse(),
   }) {
@@ -295,6 +329,7 @@ abstract class Resend implements OtpVerificationEvent {
 /// @nodoc
 mixin _$OtpVerificationState {
   bool get isLoading => throw _privateConstructorUsedError;
+  CommonResponseModel? get response => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OtpVerificationStateCopyWith<OtpVerificationState> get copyWith =>
@@ -307,7 +342,7 @@ abstract class $OtpVerificationStateCopyWith<$Res> {
           $Res Function(OtpVerificationState) then) =
       _$OtpVerificationStateCopyWithImpl<$Res, OtpVerificationState>;
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, CommonResponseModel? response});
 }
 
 /// @nodoc
@@ -325,12 +360,17 @@ class _$OtpVerificationStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
+    Object? response = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as CommonResponseModel?,
     ) as $Val);
   }
 }
@@ -343,7 +383,7 @@ abstract class _$$OtpVerificationStateImplCopyWith<$Res>
       __$$OtpVerificationStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, CommonResponseModel? response});
 }
 
 /// @nodoc
@@ -358,12 +398,17 @@ class __$$OtpVerificationStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? response = freezed,
   }) {
     return _then(_$OtpVerificationStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as CommonResponseModel?,
     ));
   }
 }
@@ -373,14 +418,16 @@ class __$$OtpVerificationStateImplCopyWithImpl<$Res>
 class _$OtpVerificationStateImpl
     with DiagnosticableTreeMixin
     implements _OtpVerificationState {
-  const _$OtpVerificationStateImpl({required this.isLoading});
+  const _$OtpVerificationStateImpl({required this.isLoading, this.response});
 
   @override
   final bool isLoading;
+  @override
+  final CommonResponseModel? response;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'OtpVerificationState(isLoading: $isLoading)';
+    return 'OtpVerificationState(isLoading: $isLoading, response: $response)';
   }
 
   @override
@@ -388,7 +435,8 @@ class _$OtpVerificationStateImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'OtpVerificationState'))
-      ..add(DiagnosticsProperty('isLoading', isLoading));
+      ..add(DiagnosticsProperty('isLoading', isLoading))
+      ..add(DiagnosticsProperty('response', response));
   }
 
   @override
@@ -397,11 +445,13 @@ class _$OtpVerificationStateImpl
         (other.runtimeType == runtimeType &&
             other is _$OtpVerificationStateImpl &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.response, response) ||
+                other.response == response));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
+  int get hashCode => Object.hash(runtimeType, isLoading, response);
 
   @JsonKey(ignore: true)
   @override
@@ -413,11 +463,14 @@ class _$OtpVerificationStateImpl
 }
 
 abstract class _OtpVerificationState implements OtpVerificationState {
-  const factory _OtpVerificationState({required final bool isLoading}) =
-      _$OtpVerificationStateImpl;
+  const factory _OtpVerificationState(
+      {required final bool isLoading,
+      final CommonResponseModel? response}) = _$OtpVerificationStateImpl;
 
   @override
   bool get isLoading;
+  @override
+  CommonResponseModel? get response;
   @override
   @JsonKey(ignore: true)
   _$$OtpVerificationStateImplCopyWith<_$OtpVerificationStateImpl>

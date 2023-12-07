@@ -11,16 +11,18 @@ class BoldText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        color: color,
-        fontSize: 30,
-        fontWeight: FontWeight.w700,
+       // color: color,
+        fontSize: 33,
+        fontWeight: FontWeight.w900,
+        letterSpacing: 1.5,
       ),
     );
   }
 }
 
 class SmallText extends StatelessWidget {
-  const SmallText({super.key, required this.text, this.color, required this.size});
+  const SmallText(
+      {super.key, required this.text, this.color, required this.size});
 
   final double? size;
   final String text;

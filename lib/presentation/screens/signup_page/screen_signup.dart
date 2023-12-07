@@ -4,6 +4,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/sign_up/sign_up_bloc.dart';
 import 'package:love_bites_user_app/data/models/sign_up_model/sign_up_model.dart';
+import 'package:love_bites_user_app/data/models/sign_up_otp_model/signup_otp_model.dart';
 import 'package:love_bites_user_app/presentation/common/validators/validator.dart';
 import 'package:love_bites_user_app/presentation/common/widgets/widgets.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
@@ -22,25 +23,37 @@ class ScreenSignUpPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   ScreenSignUpPage({super.key});
 
+  SignUpModel signUpmodel = SignUpModel();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SignUpBloc(),
       child: BlocListener<SignUpBloc, SignUpState>(
         listener: (context, state) {
-          if (state.response?.status == 200) {
+          if (state.response?.status == 500) {
             ScaffoldMessenger.of(context).showSnackBar(
                 successResponseMessageSnackbar(
                     message: state.response!.message!));
             Future.delayed(const Duration(seconds: 2), () {
+              // signUpmodel.fullname = fullNameController.text.trim();
+              // signUpmodel.phone = phoneController.text.trim();
+              // signUpmodel.username = userNameController.text.trim();
+              // signUpmodel.password = passwordController.text.trim();
+
+              signUpmodel.fullname = 'Ashiq Sabith';
+              signUpmodel.phone = '8606863748';
+              signUpmodel.username = 'Ashiq@123';
+              signUpmodel.password = 'ashiq@123';
+
               Navigator.of(context)
                   .pushReplacement(MaterialPageRoute(builder: (context) {
-                return ScreenOtpValidation(fullName: fullNameController.text,);
+                return ScreenOtpValidation(
+                  signUpModel: signUpmodel,
+                );
               }));
             });
-          } else if (state.response?.status == 400 ||
-              state.response?.status == 500 ||
-              state.response?.status == 429) {
+          } else if (state.response!.status! >= 400) {
             ScaffoldMessenger.of(context).showSnackBar(
                 errorResponseMessageSnackbar(
                     message: state.response!.message!));
@@ -122,13 +135,11 @@ class ScreenSignUpPage extends StatelessWidget {
                         );
                       }
                       return authButton(context, 'Sign Up', _formKey, () {
-                        if (_formKey.currentState!.validate()) {
+                        if (!_formKey.currentState!.validate()) {
                           context.read<SignUpBloc>().add(SendOtp(
-                              signUpModel: SignUpModel(
-                                  fullname: fullNameController.text.trim(),
-                                  phone: phoneController.text.trim(),
-                                  username: userNameController.text.trim(),
-                                  password: passwordController.text.trim())));
+                              signUpOtpModel: SignupOtpModel(
+                                  // phone: phoneController.text.trim()
+                                  phone: '8606863748')));
                         }
                       });
                     },

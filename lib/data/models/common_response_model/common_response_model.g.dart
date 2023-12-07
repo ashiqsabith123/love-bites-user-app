@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sign_up_otp_response_model.dart';
+part of 'common_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignUpOtpResponseModel _$SignUpOtpResponseModelFromJson(
-        Map<String, dynamic> json) =>
-    SignUpOtpResponseModel(
+CommonResponseModel _$CommonResponseModelFromJson(Map<String, dynamic> json) =>
+    CommonResponseModel(
       status: json['status'] as int?,
       message: json['message'] as String?,
-    )..error = json['error'] as String?;
+      error: json['error'] as String?,
+    );
 
-Map<String, dynamic> _$SignUpOtpResponseModelToJson(
-        SignUpOtpResponseModel instance) =>
+Map<String, dynamic> _$CommonResponseModelToJson(
+        CommonResponseModel instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,

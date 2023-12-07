@@ -16,20 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignUpEvent {
-  SignUpModel get signUpModel => throw _privateConstructorUsedError;
+  SignupOtpModel get signUpOtpModel => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SignUpModel signUpModel) sendOtp,
+    required TResult Function(SignupOtpModel signUpOtpModel) sendOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SignUpModel signUpModel)? sendOtp,
+    TResult? Function(SignupOtpModel signUpOtpModel)? sendOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SignUpModel signUpModel)? sendOtp,
+    TResult Function(SignupOtpModel signUpOtpModel)? sendOtp,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $SignUpEventCopyWith<$Res> {
           SignUpEvent value, $Res Function(SignUpEvent) then) =
       _$SignUpEventCopyWithImpl<$Res, SignUpEvent>;
   @useResult
-  $Res call({SignUpModel signUpModel});
+  $Res call({SignupOtpModel signUpOtpModel});
 }
 
 /// @nodoc
@@ -77,13 +77,13 @@ class _$SignUpEventCopyWithImpl<$Res, $Val extends SignUpEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? signUpModel = null,
+    Object? signUpOtpModel = null,
   }) {
     return _then(_value.copyWith(
-      signUpModel: null == signUpModel
-          ? _value.signUpModel
-          : signUpModel // ignore: cast_nullable_to_non_nullable
-              as SignUpModel,
+      signUpOtpModel: null == signUpOtpModel
+          ? _value.signUpOtpModel
+          : signUpOtpModel // ignore: cast_nullable_to_non_nullable
+              as SignupOtpModel,
     ) as $Val);
   }
 }
@@ -96,7 +96,7 @@ abstract class _$$SendOtpImplCopyWith<$Res>
       __$$SendOtpImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SignUpModel signUpModel});
+  $Res call({SignupOtpModel signUpOtpModel});
 }
 
 /// @nodoc
@@ -110,13 +110,13 @@ class __$$SendOtpImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? signUpModel = null,
+    Object? signUpOtpModel = null,
   }) {
     return _then(_$SendOtpImpl(
-      signUpModel: null == signUpModel
-          ? _value.signUpModel
-          : signUpModel // ignore: cast_nullable_to_non_nullable
-              as SignUpModel,
+      signUpOtpModel: null == signUpOtpModel
+          ? _value.signUpOtpModel
+          : signUpOtpModel // ignore: cast_nullable_to_non_nullable
+              as SignupOtpModel,
     ));
   }
 }
@@ -124,14 +124,14 @@ class __$$SendOtpImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SendOtpImpl implements SendOtp {
-  const _$SendOtpImpl({required this.signUpModel});
+  const _$SendOtpImpl({required this.signUpOtpModel});
 
   @override
-  final SignUpModel signUpModel;
+  final SignupOtpModel signUpOtpModel;
 
   @override
   String toString() {
-    return 'SignUpEvent.sendOtp(signUpModel: $signUpModel)';
+    return 'SignUpEvent.sendOtp(signUpOtpModel: $signUpOtpModel)';
   }
 
   @override
@@ -139,12 +139,12 @@ class _$SendOtpImpl implements SendOtp {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SendOtpImpl &&
-            (identical(other.signUpModel, signUpModel) ||
-                other.signUpModel == signUpModel));
+            (identical(other.signUpOtpModel, signUpOtpModel) ||
+                other.signUpOtpModel == signUpOtpModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, signUpModel);
+  int get hashCode => Object.hash(runtimeType, signUpOtpModel);
 
   @JsonKey(ignore: true)
   @override
@@ -155,27 +155,27 @@ class _$SendOtpImpl implements SendOtp {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SignUpModel signUpModel) sendOtp,
+    required TResult Function(SignupOtpModel signUpOtpModel) sendOtp,
   }) {
-    return sendOtp(signUpModel);
+    return sendOtp(signUpOtpModel);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SignUpModel signUpModel)? sendOtp,
+    TResult? Function(SignupOtpModel signUpOtpModel)? sendOtp,
   }) {
-    return sendOtp?.call(signUpModel);
+    return sendOtp?.call(signUpOtpModel);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SignUpModel signUpModel)? sendOtp,
+    TResult Function(SignupOtpModel signUpOtpModel)? sendOtp,
     required TResult orElse(),
   }) {
     if (sendOtp != null) {
-      return sendOtp(signUpModel);
+      return sendOtp(signUpOtpModel);
     }
     return orElse();
   }
@@ -210,11 +210,11 @@ class _$SendOtpImpl implements SendOtp {
 }
 
 abstract class SendOtp implements SignUpEvent {
-  const factory SendOtp({required final SignUpModel signUpModel}) =
+  const factory SendOtp({required final SignupOtpModel signUpOtpModel}) =
       _$SendOtpImpl;
 
   @override
-  SignUpModel get signUpModel;
+  SignupOtpModel get signUpOtpModel;
   @override
   @JsonKey(ignore: true)
   _$$SendOtpImplCopyWith<_$SendOtpImpl> get copyWith =>
@@ -224,7 +224,8 @@ abstract class SendOtp implements SignUpEvent {
 /// @nodoc
 mixin _$SignUpState {
   bool get isLoading => throw _privateConstructorUsedError;
-  SignUpOtpResponseModel? get response => throw _privateConstructorUsedError;
+  CommonResponseModel? get response => throw _privateConstructorUsedError;
+  SignUpModel? get signupModel => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpStateCopyWith<SignUpState> get copyWith =>
@@ -237,7 +238,10 @@ abstract class $SignUpStateCopyWith<$Res> {
           SignUpState value, $Res Function(SignUpState) then) =
       _$SignUpStateCopyWithImpl<$Res, SignUpState>;
   @useResult
-  $Res call({bool isLoading, SignUpOtpResponseModel? response});
+  $Res call(
+      {bool isLoading,
+      CommonResponseModel? response,
+      SignUpModel? signupModel});
 }
 
 /// @nodoc
@@ -255,6 +259,7 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
   $Res call({
     Object? isLoading = null,
     Object? response = freezed,
+    Object? signupModel = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -264,7 +269,11 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as SignUpOtpResponseModel?,
+              as CommonResponseModel?,
+      signupModel: freezed == signupModel
+          ? _value.signupModel
+          : signupModel // ignore: cast_nullable_to_non_nullable
+              as SignUpModel?,
     ) as $Val);
   }
 }
@@ -277,7 +286,10 @@ abstract class _$$SignUpStateImplCopyWith<$Res>
       __$$SignUpStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, SignUpOtpResponseModel? response});
+  $Res call(
+      {bool isLoading,
+      CommonResponseModel? response,
+      SignUpModel? signupModel});
 }
 
 /// @nodoc
@@ -293,6 +305,7 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? response = freezed,
+    Object? signupModel = freezed,
   }) {
     return _then(_$SignUpStateImpl(
       isLoading: null == isLoading
@@ -302,7 +315,11 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as SignUpOtpResponseModel?,
+              as CommonResponseModel?,
+      signupModel: freezed == signupModel
+          ? _value.signupModel
+          : signupModel // ignore: cast_nullable_to_non_nullable
+              as SignUpModel?,
     ));
   }
 }
@@ -310,16 +327,19 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SignUpStateImpl implements _SignUpState {
-  const _$SignUpStateImpl({required this.isLoading, this.response});
+  const _$SignUpStateImpl(
+      {required this.isLoading, this.response, this.signupModel});
 
   @override
   final bool isLoading;
   @override
-  final SignUpOtpResponseModel? response;
+  final CommonResponseModel? response;
+  @override
+  final SignUpModel? signupModel;
 
   @override
   String toString() {
-    return 'SignUpState(isLoading: $isLoading, response: $response)';
+    return 'SignUpState(isLoading: $isLoading, response: $response, signupModel: $signupModel)';
   }
 
   @override
@@ -330,11 +350,14 @@ class _$SignUpStateImpl implements _SignUpState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.response, response) ||
-                other.response == response));
+                other.response == response) &&
+            (identical(other.signupModel, signupModel) ||
+                other.signupModel == signupModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, response);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, response, signupModel);
 
   @JsonKey(ignore: true)
   @override
@@ -346,12 +369,15 @@ class _$SignUpStateImpl implements _SignUpState {
 abstract class _SignUpState implements SignUpState {
   const factory _SignUpState(
       {required final bool isLoading,
-      final SignUpOtpResponseModel? response}) = _$SignUpStateImpl;
+      final CommonResponseModel? response,
+      final SignUpModel? signupModel}) = _$SignUpStateImpl;
 
   @override
   bool get isLoading;
   @override
-  SignUpOtpResponseModel? get response;
+  CommonResponseModel? get response;
+  @override
+  SignUpModel? get signupModel;
   @override
   @JsonKey(ignore: true)
   _$$SignUpStateImplCopyWith<_$SignUpStateImpl> get copyWith =>

@@ -45,6 +45,8 @@ dependencies:
   pinput: ^2.2.31
   dio: ^5.3.3
   loading_animation_widget: ^1.2.0+4
+  flex_color_scheme: ^7.3.1
+
 
 dev_dependencies:
   flutter_test:
@@ -97,6 +99,13 @@ flutter:
     - family: Pacifico
       fonts:
         - asset: assets/fonts/Pacifico/Pacifico-Regular.ttf
+        
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato/Lato-Regular.ttf
+        - asset: assets/fonts/Lato/Lato-Bold.ttf
+          weight: 800
+
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
