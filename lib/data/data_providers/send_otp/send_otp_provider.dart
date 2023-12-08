@@ -7,11 +7,11 @@ import 'package:love_bites_user_app/util/api_end_points/api_end_points.dart';
 class SendOtpDataProvider {
   final dio = getNetwork();
 
-  Future<CommonResponseModel> sendOtp(SignupOtpModel signUpOtpModel) async {
+  Future<CommonResponseModel> sendOtp(OtpModel otpModel) async {
     await Future.delayed(const Duration(seconds: 2));
     try {
       final response =
-          await dio.post(ApiEndPoints.sendOtp, data: signUpOtpModel.toJson());
+          await dio.post(ApiEndPoints.sendOtp, data: otpModel.toJson());
       if (response.statusCode == 200) {
         return CommonResponseModel.fromJson(response.data);
       } else {
@@ -28,8 +28,7 @@ class SendOtpDataProvider {
         );
       }
     } catch (e) {
-      return CommonResponseModel(
-          status: 404, message: 'Something error1 $e');
+      return CommonResponseModel(status: 404, message: 'Something error1 $e');
     }
 
     return CommonResponseModel();

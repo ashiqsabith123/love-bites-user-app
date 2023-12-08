@@ -3,15 +3,15 @@ import 'package:json_annotation/json_annotation.dart';
 part 'signup_otp_model.g.dart';
 
 @JsonSerializable()
-class SignupOtpModel {
+class OtpModel {
   @JsonKey(name: 'phone')
   String? phone;
 
-  SignupOtpModel({this.phone});
+  OtpModel({this.phone});
 
-  factory SignupOtpModel.fromJson(Map<String, dynamic> json) {
-    return _$SignupOtpModelFromJson(json);
+  factory OtpModel.fromJson(Map<String, dynamic> json) {
+    return _$OtpModelFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$SignupOtpModelToJson(this);
+  Map<String, dynamic> toJson() => _$OtpModelToJson(this);
 }

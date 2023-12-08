@@ -1,4 +1,5 @@
 String? phoneValidator(String? value) {
+  print("valueeeeeeeeee $value");
   if (value == null || value.isEmpty) {
     return "Phone number required";
   } else if (value.length < 10) {
