@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpVerificationStack extends StatelessWidget {
-  OtpVerificationStack();
-  // FocusNode focus;
-  //TextEditingController phoneController;
-  // GlobalKey phoneKey;
+  OtpVerificationStack(this.onCompleted);
+
+  void Function(String)? onCompleted;
 
   final defaultPinTheme = const PinTheme(
     width: 40,
@@ -65,16 +64,11 @@ class OtpVerificationStack extends StatelessWidget {
                         focusedPinTheme: focusedPinTheme,
                         submittedPinTheme: submittedPinTheme,
                         length: 6,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter OTP';
-                          } else {
-                            return null;
-                          }
-                        },
                         androidSmsAutofillMethod:
                             AndroidSmsAutofillMethod.smsUserConsentApi,
-                        onCompleted: (value) {}),
+                        // onCompleted: onCompleted,
+                        hapticFeedbackType: HapticFeedbackType.mediumImpact,
+                        onChanged: onCompleted),
                   ),
                 ],
               ),
@@ -101,9 +95,15 @@ class OtpVerificationStack extends StatelessWidget {
 }
 
 class VerifyNextButton extends StatelessWidget {
-  VerifyNextButton({super.key, required this.onclick});
+  VerifyNextButton(
+      {super.key,
+      required this.onclick,
+      required this.color,
+      required this.fontColor});
 
   final VoidCallback onclick;
+  final Color color;
+  final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -113,22 +113,21 @@ class VerifyNextButton extends StatelessWidget {
         child: InkWell(
             onTap: onclick,
             child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(50)),
-                color: Color.fromARGB(255, 226, 201, 59),
-              ),
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(50)),
+                  color: color),
               width: screenSize.width / 2,
               height: screenSize.height / 14,
-              child: const Center(
+              child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'Next',
                       style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                      ),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: fontColor),
                     ),
                   ],
                 ),

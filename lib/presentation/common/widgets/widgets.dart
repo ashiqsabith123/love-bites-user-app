@@ -117,4 +117,3 @@ class CustomOtpField extends StatelessWidget {
     );
   }
 }
-

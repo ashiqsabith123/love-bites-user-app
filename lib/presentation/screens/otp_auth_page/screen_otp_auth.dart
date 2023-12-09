@@ -31,11 +31,13 @@ class ScreenOtpAuth extends StatelessWidget {
           if (state.sendOtpResponse!.status == 200) {
             Navigator.of(context)
                 .pushReplacement(MaterialPageRoute(builder: (ctx) {
-              return const ScreenOtpVerification();
+              return ScreenOtpVerification(
+                phoneNumber: phoneController.text,
+              );
             }));
           } else if (state.sendOtpResponse!.status! >= 400) {
             showCustomSnackBar(
-                context, 1, 'Something eroor', 'Try again after sometime');
+                context, 1, 'Something error', 'Try again after sometime');
           }
         }
       },

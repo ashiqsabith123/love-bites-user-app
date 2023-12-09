@@ -1,6 +1,5 @@
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:love_bites_user_app/core/constants/constants.dart';
 import 'package:love_bites_user_app/presentation/common/validators/validator.dart';
 
 class PhoneFiled extends StatelessWidget {
@@ -24,9 +23,7 @@ class PhoneFiled extends StatelessWidget {
 }
 
 class NumberStack extends StatelessWidget {
-  NumberStack({
-    required this.phoneController, required this.focus
-  });
+  NumberStack({required this.phoneController, required this.focus});
   FocusNode focus;
   TextEditingController phoneController;
   // GlobalKey phoneKey;

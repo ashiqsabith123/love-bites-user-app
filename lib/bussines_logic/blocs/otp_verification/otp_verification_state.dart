@@ -1,15 +1,20 @@
-// part of 'otp_verification_bloc.dart';
+part of 'otp_verification_bloc.dart';
 
-// @freezed
-// class OtpVerificationState with _$OtpVerificationState {
-//   const factory OtpVerificationState({
-//     required final bool isLoading,
-//     final CommonResponseModel? response,
-//   }) = _OtpVerificationState;
+@immutable
+sealed class OtpVerificationState {
+  final bool showButton;
 
-//   factory OtpVerificationState.intial() =>
-//       const OtpVerificationState(isLoading: false);
+  OtpVerificationState({required this.showButton});
+}
 
-//   factory OtpVerificationState.verifyOtpLoadingState() =>
-//       const OtpVerificationState(isLoading: true);
-// }
+final class OtpVerificationInitial extends OtpVerificationState {
+  OtpVerificationInitial() : super(showButton: false);
+}
+
+final class ShowNextButton extends OtpVerificationState {
+  ShowNextButton() : super(showButton: true);
+}
+
+final class DisableNextButton extends OtpVerificationState {
+  DisableNextButton() : super(showButton: false);
+}

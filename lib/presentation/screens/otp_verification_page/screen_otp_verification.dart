@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:lottie/lottie.dart';
+import 'package:love_bites_user_app/bussines_logic/blocs/otp_verification/otp_verification_bloc.dart';
 import 'package:love_bites_user_app/core/constants/constants.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
 import 'package:love_bites_user_app/presentation/screens/otp_auth_page/screen_otp_auth.dart';
@@ -8,7 +10,8 @@ import 'package:love_bites_user_app/presentation/screens/otp_auth_page/screen_ot
 import 'package:love_bites_user_app/presentation/screens/otp_verification_page/widgets/widgets.dart';
 
 class ScreenOtpVerification extends StatelessWidget {
-  const ScreenOtpVerification({super.key});
+  final String phoneNumber;
+  const ScreenOtpVerification({super.key, required this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class ScreenOtpVerification extends StatelessWidget {
         body: SafeArea(
             child: SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all(30),
+        padding: EdgeInsets.only(left: 30, right: 30),
         child: Column(
           children: [
             Lottie.asset(
@@ -37,7 +40,7 @@ class ScreenOtpVerification extends StatelessWidget {
                 ),
                 kWidthFive,
                 Text(
-                  '8606863748',
+                  phoneNumber,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 ),
                 IconButton(
@@ -51,7 +54,13 @@ class ScreenOtpVerification extends StatelessWidget {
               ],
             ),
             kHeightTwenty,
-            OtpVerificationStack(
+            OtpVerificationStack((value) {
+              if (value.length < 6) {
+                context.read<OtpVerificationBloc>().add(NextButtonDisable());
+              } else {
+                context.read<OtpVerificationBloc>().add(NextButtonEnable());
+              }
+            }
                 // phoneController: phoneController,
                 // focus: _focusNode,
                 ),
@@ -65,7 +74,23 @@ class ScreenOtpVerification extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 17, color: Color.fromARGB(255, 90, 90, 90)),
                     )),
-                VerifyNextButton(onclick: () {})
+                BlocBuilder<OtpVerificationBloc, OtpVerificationState>(
+                  builder: (context, state) {
+                    if (!state.showButton) {
+                      return VerifyNextButton(
+                        onclick: () {},
+                        color: Color.fromARGB(134, 223, 223, 223),
+                        fontColor: Color.fromARGB(255, 159, 158, 158),
+                      );
+                    }
+
+                    return VerifyNextButton(
+                      onclick: () {},
+                      color: Color.fromARGB(255, 226, 201, 59),
+                      fontColor: Colors.black,
+                    );
+                  },
+                )
               ],
             )
           ],
