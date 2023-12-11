@@ -1,3 +1,4 @@
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 
 class UserDetailsStack extends StatelessWidget {
@@ -73,6 +74,48 @@ class UserDetailsStack extends StatelessWidget {
         ),
         // Add more overlapping containers as needed
       ],
+    );
+  }
+}
+
+class GenderButton extends StatelessWidget {
+  const GenderButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomCheckBoxGroup(
+      selectedColor: Colors.black12,
+      buttonTextStyle: ButtonTextStyle(
+        selectedColor: Colors.red,
+        unSelectedColor: Colors.orange,
+        textStyle: TextStyle(
+          fontSize: 16,
+        ),
+        selectedTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      unSelectedColor: Theme.of(context).canvasColor,
+      buttonLables: [
+        "Male",
+        "Female",
+      ],
+      buttonValuesList: [
+        "Monday",
+        "Tuesday",
+      ],
+      checkBoxButtonValues: (values) {
+        print(values);
+      },
+      spacing: 0,
+      //defaultSelected: "Monday",
+      horizontal: false,
+      enableButtonWrap: false,
+      // width: 40,
+      absoluteZeroSpacing: true,
+      //selectedColor: Theme.of(context).accentColor,
+      padding: 10,
     );
   }
 }

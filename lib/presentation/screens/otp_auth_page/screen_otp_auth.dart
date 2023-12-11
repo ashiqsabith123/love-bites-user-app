@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:lottie/lottie.dart';
@@ -7,7 +8,7 @@ import 'package:love_bites_user_app/bussines_logic/blocs/send_otp/send_otp_bloc.
 import 'package:love_bites_user_app/core/constants/constants.dart';
 
 import 'package:love_bites_user_app/core/textstyles/style.dart';
-import 'package:love_bites_user_app/data/models/sign_up_otp_model/signup_otp_model.dart';
+import 'package:love_bites_user_app/data/models/auth_otp_model/auth_otp_model.dart';
 
 import 'package:love_bites_user_app/presentation/screens/otp_auth_page/widgets/widgets.dart';
 import 'package:love_bites_user_app/presentation/screens/otp_verification_page/screen_otp_verification.dart';
@@ -15,7 +16,8 @@ import 'package:love_bites_user_app/util/alert_popup_fucntions/custom_snackbar.d
 
 class ScreenOtpAuth extends StatelessWidget {
   ScreenOtpAuth({super.key});
-  TextEditingController phoneController = TextEditingController();
+  TextEditingController phoneController =
+      TextEditingController(text: '8606863748');
   final FocusNode _focusNode = FocusNode();
 
   @override
@@ -37,7 +39,7 @@ class ScreenOtpAuth extends StatelessWidget {
             }));
           } else if (state.sendOtpResponse!.status! >= 400) {
             showCustomSnackBar(
-                context, 1, 'Something error', 'Try again after sometime');
+                context, 1, 'Something error', state.sendOtpResponse!.message!);
           }
         }
       },
@@ -87,7 +89,7 @@ class ScreenOtpAuth extends StatelessWidget {
                               'Please enter a valid phone number');
                         } else {
                           context.read<SendOtpBloc>().add(SendOtp(
-                              otpModel: OtpModel(
+                              authOtpModel: AuthOtpModel(
                                   phone: phoneController.text.trim())));
                         }
                       });
@@ -97,7 +99,9 @@ class ScreenOtpAuth extends StatelessWidget {
                   kHeightTwenty,
                   kHeightTwenty,
                   kHeightTwenty,
-                  AuthButton(),
+                  IconButton(
+                      onPressed: () {},
+                      icon: SvgPicture.asset('assets/svg/google.svg')),
                 ],
               ),
             ),

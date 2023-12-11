@@ -7,11 +7,11 @@ part of 'data.dart';
 // **************************************************************************
 
 Data _$DataFromJson(Map<String, dynamic> json) => Data(
-      userFound: json['userFound'] as bool?,
+      userfound: json['userfound'] as bool?,
       token: json['token'] as String?,
     );
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
-      'userFound': instance.userFound,
+      'userfound': instance.userfound,
       'token': instance.token,
     };

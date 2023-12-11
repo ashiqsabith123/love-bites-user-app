@@ -4,10 +4,10 @@ part 'data.g.dart';
 
 @JsonSerializable()
 class Data {
-  bool? userFound;
+  bool? userfound;
   String? token;
 
-  Data({this.userFound, this.token});
+  Data({this.userfound, this.token});
 
   factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
 

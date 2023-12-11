@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:love_bites_user_app/data/data_providers/get_location/get_location_provider.dart';
 import 'package:love_bites_user_app/data/data_providers/send_otp/send_otp_provider.dart';
-import 'package:love_bites_user_app/data/models/location_response_model/location_response_model.dart';
-import 'package:love_bites_user_app/data/models/response_model/response_model.dart';
-import 'package:love_bites_user_app/data/models/sign_up_otp_model/signup_otp_model.dart';
+import 'package:love_bites_user_app/data/models/auth_otp_model/auth_otp_model.dart';
+import 'package:love_bites_user_app/data/models/common_response_model/common_response_model.dart';
 import 'package:meta/meta.dart';
 
 part 'send_otp_event.dart';
@@ -15,8 +14,8 @@ class SendOtpBloc extends Bloc<SendOtpEvent, SendOtpState> {
   SendOtpBloc() : super(SendOtpInitial()) {
     on<SendOtp>((event, emit) async {
       emit(SendOtpLoading());
-      ResponseModel response =
-          await sendOtpDataProvider.sendOtp(event.otpModel);
+      CommonResponseModel response =
+          await sendOtpDataProvider.sendOtp(event.authOtpModel);
       emit(SendOtpResponseState(response));
     });
   }

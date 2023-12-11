@@ -4,6 +4,6 @@ part of 'send_otp_bloc.dart';
 sealed class SendOtpEvent {}
 
 class SendOtp extends SendOtpEvent {
-  final OtpModel otpModel;
-  SendOtp({required this.otpModel});
+  final AuthOtpModel authOtpModel;
+  SendOtp({required this.authOtpModel});
 }

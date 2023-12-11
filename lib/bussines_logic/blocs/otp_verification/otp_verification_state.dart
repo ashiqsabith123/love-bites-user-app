@@ -2,9 +2,9 @@ part of 'otp_verification_bloc.dart';
 
 @immutable
 sealed class OtpVerificationState {
-  final bool showButton;
+  bool? showButton;
 
-  OtpVerificationState({required this.showButton});
+  OtpVerificationState({this.showButton});
 }
 
 final class OtpVerificationInitial extends OtpVerificationState {
@@ -17,4 +17,13 @@ final class ShowNextButton extends OtpVerificationState {
 
 final class DisableNextButton extends OtpVerificationState {
   DisableNextButton() : super(showButton: false);
+}
+
+final class VerifyOtpLoadingState extends OtpVerificationState {
+  VerifyOtpLoadingState() : super(showButton: false);
+}
+
+final class OtpVerifiedState extends OtpVerificationState {
+  final TokenResponseModel tokenResponse;
+  OtpVerifiedState({required this.tokenResponse}) : super(showButton: false);
 }

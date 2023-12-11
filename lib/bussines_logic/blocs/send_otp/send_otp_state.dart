@@ -18,6 +18,6 @@ final class SendOtpLoading extends SendOtpState {
 }
 
 final class SendOtpResponseState extends SendOtpState {
-  ResponseModel? sendOtpResponse;
+  CommonResponseModel? sendOtpResponse;
   SendOtpResponseState(this.sendOtpResponse) : super(isLoading: false);
 }

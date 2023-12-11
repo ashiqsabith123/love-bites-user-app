@@ -1,4 +1,3 @@
-import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:love_bites_user_app/presentation/common/validators/validator.dart';
 
@@ -146,17 +145,4 @@ class NextButton extends StatelessWidget {
                   ),
                 ))));
   }
-}
-
-GoogleAuthButton AuthButton() {
-  return GoogleAuthButton(
-    onPressed: () {},
-    style: const AuthButtonStyle(
-      buttonType: AuthButtonType.icon,
-      padding: EdgeInsets.all(17),
-      borderRadius: 50,
-      textStyle: TextStyle(
-          fontSize: 17, fontFamily: 'Ubuntu', fontWeight: FontWeight.w700),
-    ),
-  );
 }

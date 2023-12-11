@@ -96,12 +96,9 @@ class OtpVerificationStack extends StatelessWidget {
 
 class VerifyNextButton extends StatelessWidget {
   VerifyNextButton(
-      {super.key,
-      required this.onclick,
-      required this.color,
-      required this.fontColor});
+      {super.key, this.onclick, required this.color, required this.fontColor});
 
-  final VoidCallback onclick;
+  final VoidCallback? onclick;
   final Color color;
   final Color fontColor;
 
@@ -112,6 +109,7 @@ class VerifyNextButton extends StatelessWidget {
         alignment: Alignment.center,
         child: InkWell(
             onTap: onclick,
+            borderRadius: const BorderRadius.all(Radius.circular(50)),
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(50)),

@@ -4,6 +4,7 @@ import 'package:love_bites_user_app/bussines_logic/blocs/user_details/user_detai
 import 'package:love_bites_user_app/core/constants/constants.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
 import 'package:love_bites_user_app/presentation/screens/user_details_page/widgets/widgets.dart';
+import 'package:love_bites_user_app/util/alert_popup_fucntions/custom_bottomsheet.dart';
 
 class ScreenUserDetails extends StatelessWidget {
   ScreenUserDetails({super.key});
@@ -52,6 +53,19 @@ class ScreenUserDetails extends StatelessWidget {
                   );
                 },
               ),
+              kHeightTwenty,
+              kHeightTen,
+              UserDetailsStack(
+                fieldName: 'Date of birth',
+                fieldType: TextInputType.datetime,
+                readOnly: true,
+                onTap: () {
+                  showCustomBottomSheet(context);
+                },
+              ),
+              kHeightTwenty,
+              kHeightTen,
+              //GenderButton()
             ],
           ),
         ),
