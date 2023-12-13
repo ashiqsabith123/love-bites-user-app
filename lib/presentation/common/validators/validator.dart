@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:love_bites_user_app/bussines_logic/blocs/user_details/user_details_bloc.dart';
+
 String? phoneValidator(String? value) {
   print("valueeeeeeeeee $value");
   if (value == null || value.isEmpty) {
@@ -7,39 +11,51 @@ String? phoneValidator(String? value) {
   }
 }
 
-String? nameValidator(String? value) {
-  if (value == null || value.isEmpty) {
-    return "Fullname required";
-  }
-}
+bool isValidFullname = false;
+bool isValidEmail = false;
+bool isValidLocation = false;
+bool isValidDOB = false;
+bool isValidGender = false;
 
-String? userNameValidator(String? value) {
-  if (value == null || value.isEmpty) {
-    return "Username required";
+validator(String? value, int? id, BuildContext? context) {
+  if (id == 1) {
+    if (value != null && value.isNotEmpty) {
+      isValidFullname = true;
+    } else {
+      isValidFullname = false;
+    }
   }
-}
-
-String? paswwordValidator(String? value) {
-  if (value == null || value.isEmpty) {
-    return "Password required";
-  }
-
-  // Check if the username contains at least one letter
-  if (!value.contains(RegExp(r'[a-z]'))) {
-    return "Password must contain capital and small letters";
-  }
-
-  // Check if the username contains at least one symbol
-  if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-    return "Password must be contain a symbol";
-  }
-
-  // Check if the username contains at least one number
-  if (!value.contains(RegExp(r'[0-9]'))) {
-    return "Password must be contain a number";
+  if (id == 2) {
+    if (value != null &&
+        value.isNotEmpty &&
+        value.contains(RegExp(
+          r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
+        ))) {
+      isValidEmail = true;
+    } else {
+      isValidEmail = false;
+    }
   }
 
-  if (value.length < 6) {
-    return "Password must be 6 letters";
+  if (id == 3) {
+    isValidLocation = true;
+  }
+
+  if (id == 4) {
+    isValidDOB = true;
+  }
+
+  if (id == 5) {
+    isValidGender = true;
+  }
+
+  if (isValidFullname &&
+      isValidEmail &&
+      isValidLocation &&
+      isValidDOB &&
+      isValidGender) {
+    context!.read<UserDetailsBloc>().add(ShowNextButton(showButton: true));
+  } else {
+    context!.read<UserDetailsBloc>().add(ShowNextButton(showButton: false));
   }
 }

@@ -16,8 +16,7 @@ import 'package:love_bites_user_app/util/alert_popup_fucntions/custom_snackbar.d
 
 class ScreenOtpAuth extends StatelessWidget {
   ScreenOtpAuth({super.key});
-  TextEditingController phoneController =
-      TextEditingController(text: '8606863748');
+  final TextEditingController phoneController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
   @override

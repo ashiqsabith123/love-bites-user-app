@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:love_bites_user_app/bussines_logic/blocs/user_details/user_details_bloc.dart';
 import 'package:love_bites_user_app/core/constants/constants.dart';
+import 'package:love_bites_user_app/data/models/date_of_birth_response_model/date_of_birth_response_model.dart';
+import 'package:love_bites_user_app/presentation/common/validators/validator.dart';
 import 'package:scroll_datetime_picker/scroll_datetime_picker.dart';
 
-Future showCustomBottomSheet(BuildContext context) async {
+Future showCustomBottomSheet(BuildContext maincontext) async {
+  String formattedDate = "";
   showModalBottomSheet(
-      context: context,
+      context: maincontext,
       builder: (context) {
         return Container(
             width: MediaQuery.of(context).size.width,
@@ -17,8 +22,6 @@ Future showCustomBottomSheet(BuildContext context) async {
                 kHeightTwenty,
                 kHeightTen,
                 ScrollDateTimePicker(
-                  wheelOption:
-                      DateTimePickerWheelOption(clipBehavior: Clip.antiAlias),
                   style: DateTimePickerStyle(
                       centerDecoration: const BoxDecoration(
                           border: Border(
@@ -37,7 +40,9 @@ Future showCustomBottomSheet(BuildContext context) async {
                           color: Color.fromARGB(255, 145, 145, 145))),
                   itemExtent: 48,
                   infiniteScroll: true,
-                  onChange: (datetime) {},
+                  onChange: (datetime) {
+                    formattedDate = DateFormat('dd/MM/yyyy').format(datetime);
+                  },
                   dateOption: DateTimePickerOption(
                     dateFormat: DateFormat('ddMMMyyyy'),
                     minDate: DateTime(1900, 1),
@@ -46,7 +51,13 @@ Future showCustomBottomSheet(BuildContext context) async {
                   ),
                 ),
                 Align(
-                  child: OkButton(onclick: () {}),
+                  child: OkButton(onclick: () async {
+                    maincontext.read<UserDetailsBloc>().add(GetDateOfBirth(
+                        dateOfBirthResponseModel:
+                            DateOfBirthResponseModel(dob: formattedDate)));
+                    
+                    Navigator.pop(maincontext);
+                  }),
                 )
               ],
             ));

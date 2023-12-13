@@ -12,7 +12,7 @@ class BoldText extends StatelessWidget {
       text,
       style: TextStyle(
         // color: color,
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: FontWeight.w900,
         letterSpacing: 1.5,
       ),
