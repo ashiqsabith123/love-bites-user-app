@@ -2,15 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/user_details/user_details_bloc.dart';
 
-String? phoneValidator(String? value) {
-  print("valueeeeeeeeee $value");
-  if (value == null || value.isEmpty) {
-    return "Phone number required";
-  } else if (value.length < 10) {
-    return "Phone number must be 10 digits";
-  }
-}
-
 bool isValidFullname = false;
 bool isValidEmail = false;
 bool isValidLocation = false;

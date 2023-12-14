@@ -17,3 +17,12 @@ samples, guidance on mobile development, and a full API reference.
 
 
 Color.fromARGB(255, 226, 201, 59),
+
+
+image = ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.file(
+                state.photo,
+                fit: BoxFit.cover,
+              ),
+            );

@@ -20,3 +20,8 @@ class ShowNextButton extends UserDetailsEvent {
 
   ShowNextButton({required this.showButton});
 }
+
+class SaveUserDetails extends UserDetailsEvent {
+  final UserDetailsModel userDetailsModel;
+  SaveUserDetails({required this.userDetailsModel});
+}

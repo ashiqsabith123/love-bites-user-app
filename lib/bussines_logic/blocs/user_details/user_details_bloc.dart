@@ -1,14 +1,18 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:love_bites_user_app/data/data_providers/get_location/get_location_provider.dart';
+import 'package:love_bites_user_app/data/data_providers/save_user_details/save_user_details_data_provider.dart';
+import 'package:love_bites_user_app/data/models/common_response_model/common_response_model.dart';
 import 'package:love_bites_user_app/data/models/date_of_birth_response_model/date_of_birth_response_model.dart';
 import 'package:love_bites_user_app/data/models/location_response_model/location_response_model.dart';
+import 'package:love_bites_user_app/data/models/user_details_model/user_details_model.dart';
 
 part 'user_details_event.dart';
 part 'user_details_state.dart';
 
 class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
   GetLocationProvider getLocationProvider = GetLocationProvider();
+  SaveUserDetailsProvider saveUserDetailsProvider = SaveUserDetailsProvider();
   UserDetailsBloc() : super(UserDetailsInitial()) {
     on<GetLocation>((event, emit) async {
       LocationResponseModel locationResponseModel =
@@ -41,6 +45,13 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
 
     on<ShowNextButton>((event, emit) {
       emit(ShowButtonState(showButton: event.showButton));
+    });
+
+    on<SaveUserDetails>((event, emit) async {
+      emit(UserDetailsSavingState());
+      CommonResponseModel response =
+          await saveUserDetailsProvider.saveUserDetails(event.userDetailsModel);
+      emit(UserDetailsSavedState(response: response));
     });
   }
 }

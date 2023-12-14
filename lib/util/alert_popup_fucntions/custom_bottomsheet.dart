@@ -55,7 +55,7 @@ Future showCustomBottomSheet(BuildContext maincontext) async {
                     maincontext.read<UserDetailsBloc>().add(GetDateOfBirth(
                         dateOfBirthResponseModel:
                             DateOfBirthResponseModel(dob: formattedDate)));
-                    
+
                     Navigator.pop(maincontext);
                   }),
                 )

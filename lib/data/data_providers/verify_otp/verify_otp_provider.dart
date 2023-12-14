@@ -6,7 +6,6 @@ import 'package:love_bites_user_app/data/network/dio_network.dart';
 import 'package:love_bites_user_app/util/api_end_points/api_end_points.dart';
 
 class VerifyOtpDataProvider {
-  final tokensStorage = new FlutterSecureStorage();
   final dio = getNetwork();
   Future<TokenResponseModel> verifyOtp(VerifyOtpModel verifyOtpModel) async {
     await Future.delayed(const Duration(seconds: 2));
@@ -15,7 +14,6 @@ class VerifyOtpDataProvider {
           data: verifyOtpModel.toJson());
 
       if (response.statusCode == 200) {
-        print(response.data.toString());
         return TokenResponseModel.fromJson(response.data);
       } else {
         //if any error

@@ -215,7 +215,7 @@ class NextButton extends StatelessWidget {
   }
 }
 
-Widget buildGenderButton() {
+Widget buildGenderButton(void Function()? ontap1, void Function()? ontap2) {
   Color? color1;
   Color? color2;
   Color? fontcolor1;
@@ -230,17 +230,12 @@ Widget buildGenderButton() {
         fontcolor2 = state.fontcolor2;
       }
       return GenderButton(
-        color1: color1,
-        color2: color2,
-        fontcolor1: fontcolor1,
-        fontcolor2: fontcolor2,
-        ontap1: () {
-          context.read<UserDetailsBloc>().add(SelectGender(id: 1));
-        },
-        ontap2: () {
-          context.read<UserDetailsBloc>().add(SelectGender(id: 2));
-        },
-      );
+          color1: color1,
+          color2: color2,
+          fontcolor1: fontcolor1,
+          fontcolor2: fontcolor2,
+          ontap1: ontap1,
+          ontap2: ontap2);
     },
   );
 }

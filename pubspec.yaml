@@ -50,6 +50,8 @@ dependencies:
   geocoding: ^2.1.1
   scroll_datetime_picker: ^0.0.4
   flutter_secure_storage: ^9.0.0
+  image_picker: ^1.0.5
+ 
   
   
 

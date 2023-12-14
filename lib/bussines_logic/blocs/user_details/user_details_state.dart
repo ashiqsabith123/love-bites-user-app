@@ -35,3 +35,11 @@ final class ShowButtonState extends UserDetailsState {
 
   ShowButtonState({required this.showButton});
 }
+
+final class UserDetailsSavingState extends UserDetailsState {}
+
+final class UserDetailsSavedState extends UserDetailsState {
+  final CommonResponseModel response;
+
+  UserDetailsSavedState({required this.response});
+}

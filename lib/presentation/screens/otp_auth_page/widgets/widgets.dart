@@ -70,7 +70,7 @@ class NumberStack extends StatelessWidget {
                       //  key: phoneKey,
                       controller: phoneController,
                       focusNode: focus,
-                      validator: phoneValidator,
+
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
                       cursorColor: const Color.fromARGB(255, 89, 31, 31),
