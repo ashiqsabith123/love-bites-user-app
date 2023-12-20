@@ -3,4 +3,5 @@ class ApiEndPoints {
   static String sendOtp = '/sendotp';
   static String verifyOtpAndAuth = '/verifyotp';
   static String saveuserdetails = '/details';
+  static String uploadPhotos = '/upload/photos';
 }

@@ -20,3 +20,5 @@ final class DeleteImageState extends PhotoUploadState {
   int id;
   DeleteImageState({required this.id});
 }
+
+

@@ -4,8 +4,13 @@ part 'common_response_model.g.dart';
 
 @JsonSerializable()
 class CommonResponseModel {
+  @JsonKey(name: 'status')
   int? status;
+
+  @JsonKey(name: 'message')
   String? message;
+
+  @JsonKey(name: 'error')
   String? error;
 
   CommonResponseModel({this.status, this.message, this.error});

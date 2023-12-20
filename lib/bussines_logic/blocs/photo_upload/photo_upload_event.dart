@@ -11,6 +11,9 @@ class SelectPhoto extends PhotoUploadEvent {
 
 class DeleteImage extends PhotoUploadEvent {
   int id;
+  String imagePath;
 
-  DeleteImage({required this.id});
+  DeleteImage({required this.id, required this.imagePath});
 }
+
+class UploadPhoto extends PhotoUploadEvent {}

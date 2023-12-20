@@ -106,7 +106,9 @@ class ImageBorder extends StatelessWidget {
                 backgroundColor: Colors.red,
                 mini: true,
                 onPressed: () {
-                  context.read<PhotoUploadBloc>().add(DeleteImage(id: id));
+                  context
+                      .read<PhotoUploadBloc>()
+                      .add(DeleteImage(id: id, imagePath: image.path));
                 },
                 child: Icon(
                   size: 15,

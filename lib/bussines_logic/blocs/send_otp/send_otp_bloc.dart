@@ -10,7 +10,7 @@ part 'send_otp_state.dart';
 
 class SendOtpBloc extends Bloc<SendOtpEvent, SendOtpState> {
   SendOtpDataProvider sendOtpDataProvider = SendOtpDataProvider();
-  GetLocationProvider getLocationProvider = GetLocationProvider();
+
   SendOtpBloc() : super(SendOtpInitial()) {
     on<SendOtp>((event, emit) async {
       emit(SendOtpLoading());

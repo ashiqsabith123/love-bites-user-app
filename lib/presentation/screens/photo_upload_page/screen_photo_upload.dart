@@ -145,7 +145,9 @@ class ScreenPhotoUpload extends StatelessWidget {
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
             ),
             kHeightTwenty,
-            NextButton(onclick: () {})
+            NextButton(onclick: () {
+              context.read<PhotoUploadBloc>().add(UploadPhoto());
+            })
           ],
         ),
       )),
