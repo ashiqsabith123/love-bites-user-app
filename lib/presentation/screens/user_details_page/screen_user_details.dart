@@ -6,7 +6,6 @@ import 'package:love_bites_user_app/core/constants/constants.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
 import 'package:love_bites_user_app/data/models/user_details_model/user_details_model.dart';
 import 'package:love_bites_user_app/presentation/common/validators/validator.dart';
-import 'package:love_bites_user_app/presentation/screens/otp_verification_page/screen_otp_verification.dart';
 import 'package:love_bites_user_app/presentation/screens/photo_upload_page/screen_photo_upload.dart';
 import 'package:love_bites_user_app/presentation/screens/user_details_page/widgets/widgets.dart';
 import 'package:love_bites_user_app/util/alert_popup_fucntions/custom_bottomsheet.dart';

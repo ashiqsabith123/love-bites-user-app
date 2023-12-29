@@ -28,14 +28,14 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
     on<SelectGender>((event, emit) {
       if (event.id == 1) {
         emit(GenderSelectedState(
-          color1: Color.fromARGB(255, 0, 49, 14),
+          color1: const Color.fromARGB(255, 0, 49, 14),
           color2: Colors.white,
           fontcolor1: Colors.white,
           fontcolor2: Colors.black,
         ));
       } else if (event.id == 2) {
         emit(GenderSelectedState(
-          color2: Color.fromARGB(255, 0, 49, 14),
+          color2: const Color.fromARGB(255, 0, 49, 14),
           color1: Colors.white,
           fontcolor2: Colors.white,
           fontcolor1: Colors.black,

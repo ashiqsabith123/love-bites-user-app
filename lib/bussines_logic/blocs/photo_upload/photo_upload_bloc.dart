@@ -29,7 +29,7 @@ class PhotoUploadBloc extends Bloc<PhotoUploadEvent, PhotoUploadState> {
       photos.removeWhere(
         (element) => element.path == event.imagePath,
       );
-      
+
       emit(DeleteImageState(id: event.id));
     });
 
@@ -48,8 +48,7 @@ class PhotoUploadBloc extends Bloc<PhotoUploadEvent, PhotoUploadState> {
       }
       CommonResponseModel resp =
           await uploadPhotosDataProvider.uploadPhotos(formData);
-
-      //print(formData.files);
+      emit(PhotoUploadedState(resp: resp));
     });
   }
 }

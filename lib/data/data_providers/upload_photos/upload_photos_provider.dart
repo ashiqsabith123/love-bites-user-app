@@ -15,7 +15,7 @@ class UploadPhotosDataProvider {
             'Authorization': 'Bearer $token',
           }),
           data: form);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return CommonResponseModel.fromJson(response.data);
       } else {
         //if any error

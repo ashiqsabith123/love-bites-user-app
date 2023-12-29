@@ -21,4 +21,8 @@ final class DeleteImageState extends PhotoUploadState {
   DeleteImageState({required this.id});
 }
 
+final class PhotoUploadedState extends PhotoUploadState {
+  final CommonResponseModel resp;
 
+  PhotoUploadedState({required this.resp});
+}
