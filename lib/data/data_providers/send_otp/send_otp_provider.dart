@@ -19,6 +19,7 @@ class SendOtpDataProvider {
         return CommonResponseModel(status: 404, message: 'Something error1');
       }
     } on DioException catch (e) {
+      print(e.toString());
       if (e.response!.statusCode! >= 400) {
         return CommonResponseModel(
           status: e.response?.statusCode,

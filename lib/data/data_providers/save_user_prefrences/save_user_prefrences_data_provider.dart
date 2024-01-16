@@ -1,20 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:love_bites_user_app/data/models/common_response_model/common_response_model.dart';
+import 'package:love_bites_user_app/data/models/user_prefrences_model/user_prefrences_model/user_prefrences_model.dart';
 import 'package:love_bites_user_app/data/network/dio_network.dart';
 import 'package:love_bites_user_app/data/secure_data/secure_data.dart';
 import 'package:love_bites_user_app/util/api_end_points/api_end_points.dart';
 
-class UploadPhotosDataProvider {
+class SaveUserPrefDataProvider {
   final dio = getNetwork();
-  Future<CommonResponseModel> uploadPhotos(FormData form) async {
+  Future<CommonResponseModel> saveUserPref(
+      UserPrefrencesModel userPrefrencesModel) async {
     try {
       String? token = await tokenStorage.read(key: 'token');
-      final response = await dio.post(ApiEndPoints.uploadPhotos,
+      final response = await dio.post(ApiEndPoints.saveUserPref,
           options: Options(headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer $token',
           }),
-          data: form);
+          data: userPrefrencesModel.toJson());
       if (response.statusCode == 201) {
         return CommonResponseModel.fromJson(response.data);
       } else {

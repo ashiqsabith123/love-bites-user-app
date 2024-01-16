@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:love_bites_user_app/bussines_logic/blocs/home_page/home_page_bloc.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/otp_verification/otp_verification_bloc.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/photo_upload/photo_upload_bloc.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/send_otp/send_otp_bloc.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/user_details/user_details_bloc.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/user_prefrences/user_prefrences_bloc.dart';
+import 'package:love_bites_user_app/presentation/screens/home_page/screen_home_page.dart';
 import 'package:love_bites_user_app/presentation/screens/otp_auth_page/screen_otp_auth.dart';
 import 'package:love_bites_user_app/presentation/screens/otp_verification_page/screen_otp_verification.dart';
 import 'package:love_bites_user_app/presentation/screens/photo_upload_page/screen_photo_upload.dart';
 import 'package:love_bites_user_app/presentation/screens/user_details_page/screen_user_details.dart';
+import 'package:love_bites_user_app/presentation/screens/user_preferences_page/screen_all_done_pag.dart';
 import 'package:love_bites_user_app/presentation/screens/user_preferences_page/screen_user_preferences.dart';
 
 void main() {
@@ -26,12 +29,13 @@ class MyApp extends StatelessWidget {
             create: (ctx) => OtpVerificationBloc()),
         BlocProvider<UserDetailsBloc>(create: (ctx) => UserDetailsBloc()),
         BlocProvider<PhotoUploadBloc>(create: (ctx) => PhotoUploadBloc()),
-        BlocProvider<UserPrefrencesBloc>(create: (ctx) => UserPrefrencesBloc())
+        BlocProvider<UserPrefrencesBloc>(create: (ctx) => UserPrefrencesBloc()),
+        BlocProvider<HomePageBloc>(create: (ctx) => HomePageBloc())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Ubuntu'),
-        home: ScreenPhotoUpload(),
+        home:  ScreenHomePage(),
       ),
     );
   }

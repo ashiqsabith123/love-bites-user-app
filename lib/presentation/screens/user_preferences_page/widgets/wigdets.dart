@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import 'package:love_bites_user_app/bussines_logic/blocs/user_prefrences/user_prefrences_bloc.dart';
 import 'package:love_bites_user_app/core/constants/constants.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
@@ -200,8 +201,10 @@ List<Widget> listView = [
     text1: "What's your",
     text2: 'love language?',
   ),
-  const DoneWidget()
+  const LastLoading()
 ];
+
+List<String> details = [];
 
 class CommonListView extends StatelessWidget {
   CommonListView(
@@ -231,14 +234,17 @@ class CommonListView extends StatelessWidget {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 13,
                         child: InkWell(
                           splashColor: const Color.fromARGB(255, 0, 49, 14),
                           highlightColor: const Color.fromARGB(255, 0, 49, 14),
                           onTap: () {
-                            Future.delayed(Duration(milliseconds: 300), () {
+                            details.add(array[index]);
+
+                            Future.delayed(const Duration(milliseconds: 300),
+                                () {
                               context
                                   .read<UserPrefrencesBloc>()
                                   .add(ChangeUserPrefrencePage());
@@ -270,28 +276,27 @@ class CommonListView extends StatelessWidget {
   }
 }
 
-class DoneWidget extends StatelessWidget {
-  const DoneWidget({super.key});
+class LastLoading extends StatelessWidget {
+  const LastLoading({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Lottie.asset(
-          'assets/animations/Done.json',
-          width: double.infinity,
-          repeat: false,
+        LoadingAnimationWidget.horizontalRotatingDots(
+          color: const Color.fromARGB(255, 226, 201, 59),
+          size: 100,
         ),
-        BoldText(text: 'All done', color: Colors.black),
-        kHeightTen,
-        kHeightFive,
         const Text(
-          textAlign: TextAlign.center,
-          ' We built this app exclusively for you to meet someone special. Be good. Be authentic. Find that love',
+          'Creating your profile',
           style: TextStyle(
-              fontSize: 17, fontWeight: FontWeight.w700, color: Colors.black38),
-        ),
-        NextButton(onclick: () {})
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+          ),
+        )
       ],
     );
   }
@@ -314,7 +319,7 @@ class NextButton extends StatelessWidget {
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
-                    color: Color.fromARGB(255, 226, 201, 59),
+                    color: primaryColor,
                   ),
                   width: screenSize.width / 1.25,
                   height: screenSize.height / 14,

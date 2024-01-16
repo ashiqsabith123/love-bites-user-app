@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:love_bites_user_app/bussines_logic/blocs/photo_upload/photo_upload_bloc.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/user_details/user_details_bloc.dart';
 
 bool isValidFullname = false;
@@ -7,6 +8,7 @@ bool isValidEmail = false;
 bool isValidLocation = false;
 bool isValidDOB = false;
 bool isValidGender = false;
+int photoCount = 0;
 
 validator(String? value, int? id, BuildContext? context) {
   if (id == 1) {
@@ -49,4 +51,12 @@ validator(String? value, int? id, BuildContext? context) {
   } else {
     context!.read<UserDetailsBloc>().add(ShowNextButton(showButton: false));
   }
+}
+
+void photoValidator(BuildContext context, bool stat) {
+  photoCount += stat ? 1 : -1;
+
+  context.read<PhotoUploadBloc>().add(
+        ShowNextPhotoButton(showButton: photoCount >= 2),
+      );
 }

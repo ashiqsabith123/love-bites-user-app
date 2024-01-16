@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/photo_upload/photo_upload_bloc.dart';
 import 'package:love_bites_user_app/core/constants/constants.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
+import 'package:love_bites_user_app/presentation/common/validators/validator.dart';
 import 'package:love_bites_user_app/presentation/screens/photo_upload_page/widgets/widgets.dart';
 import 'package:love_bites_user_app/presentation/screens/user_preferences_page/screen_user_preferences.dart';
 import 'package:love_bites_user_app/util/alert_popup_fucntions/custom_snackbar.dart';
@@ -56,6 +55,7 @@ class ScreenPhotoUpload extends StatelessWidget {
                     }
                   }
                   if (state is PhotoPickedState) {
+                    photoValidator(context, true);
                     switch (state.id) {
                       case 1:
                         image1 = ImageBorder(
@@ -71,6 +71,7 @@ class ScreenPhotoUpload extends StatelessWidget {
                   }
 
                   if (state is DeleteImageState) {
+                    photoValidator(context, false);
                     if (state.id == 1) {
                       image1 = null;
                     }
@@ -169,28 +170,32 @@ class ScreenPhotoUpload extends StatelessWidget {
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
               ),
               kHeightTwenty,
-              NextButton(onclick: () {
-                context.read<PhotoUploadBloc>().add(UploadPhoto());
-              })
+              BlocBuilder<PhotoUploadBloc, PhotoUploadState>(
+                builder: (context, state) {
+                  if (state is PhotoUploadingState) {
+                    return LoadingAnimationWidget.inkDrop(
+                      color: const Color.fromARGB(255, 226, 201, 59),
+                      size: 35,
+                    );
+                  }
+                  if (state is ShowButtonState) {
+                    if (state.showButton) {
+                      return NextButton(
+                        onclick: () {
+                          context.read<PhotoUploadBloc>().add(UploadPhoto());
+                        },
+                        color: const Color.fromARGB(255, 226, 201, 59),
+                      );
+                    }
+                  }
+                  return NextButton(
+                      color: const Color.fromARGB(134, 223, 223, 223),
+                      fontColor: const Color.fromARGB(255, 159, 158, 158));
+                },
+              )
             ],
           ),
         )),
-      ),
-    );
-  }
-}
-
-class Loading extends StatelessWidget {
-  const Loading({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: LoadingAnimationWidget.inkDrop(
-        color: Color.fromARGB(255, 226, 201, 59),
-        size: 35,
       ),
     );
   }

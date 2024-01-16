@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +16,7 @@ void showCustomSnackBar(
       types = ContentType.help;
   }
   final snackBar = SnackBar(
-    duration: Duration(milliseconds: 1300),
+    duration: const Duration(milliseconds: 1600),
     elevation: 0,
     behavior: SnackBarBehavior.floating,
     backgroundColor: Colors.transparent,

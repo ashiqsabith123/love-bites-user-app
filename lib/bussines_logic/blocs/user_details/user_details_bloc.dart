@@ -49,7 +49,7 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
 
     on<SaveUserDetails>((event, emit) async {
       emit(UserDetailsSavingState());
-      CommonResponseModel response =
+      final response =
           await saveUserDetailsProvider.saveUserDetails(event.userDetailsModel);
       emit(UserDetailsSavedState(response: response));
     });

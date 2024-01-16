@@ -16,4 +16,12 @@ class DeleteImage extends PhotoUploadEvent {
   DeleteImage({required this.id, required this.imagePath});
 }
 
+class ShowNextPhotoButton extends PhotoUploadEvent {
+  final bool showButton;
+
+  ShowNextPhotoButton({required this.showButton});
+}
+
 class UploadPhoto extends PhotoUploadEvent {}
+
+

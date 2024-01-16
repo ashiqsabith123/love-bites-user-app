@@ -6,7 +6,11 @@ sealed class UserPrefrencesState {}
 final class UserPrefrencesInitial extends UserPrefrencesState {}
 
 final class PageChangedState extends UserPrefrencesState {
- 
-
   PageChangedState();
+}
+
+final class UserPrefrencesSavedState extends UserPrefrencesState {
+  final CommonResponseModel resp;
+
+  UserPrefrencesSavedState({required this.resp});
 }

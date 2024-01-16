@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/photo_upload/photo_upload_bloc.dart';
 
 class SelectImage extends StatelessWidget {
@@ -48,9 +49,11 @@ class SelectImage extends StatelessWidget {
 }
 
 class NextButton extends StatelessWidget {
-  NextButton({super.key, required this.onclick});
+  NextButton({super.key, this.onclick, required this.color, this.fontColor});
 
-  final VoidCallback onclick;
+  final VoidCallback? onclick;
+  final Color color;
+  final Color? fontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -62,19 +65,19 @@ class NextButton extends StatelessWidget {
             child: InkWell(
                 onTap: onclick,
                 child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                    color: Color.fromARGB(255, 226, 201, 59),
-                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(50)),
+                      color: color),
                   width: screenSize.width / 2,
                   height: screenSize.height / 14,
-                  child: const Center(
+                  child: Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'Next',
                           style: TextStyle(
+                            color: fontColor,
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
                           ),
@@ -116,5 +119,21 @@ class ImageBorder extends StatelessWidget {
                 )),
           ),
         ));
+  }
+}
+
+class Loading extends StatelessWidget {
+  const Loading({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: LoadingAnimationWidget.inkDrop(
+        color: Color.fromARGB(255, 226, 201, 59),
+        size: 35,
+      ),
+    );
   }
 }

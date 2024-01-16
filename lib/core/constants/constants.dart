@@ -8,6 +8,10 @@ const kHeightTwenty = SizedBox(
   height: 20,
 );
 
+const kHeightFourty = SizedBox(
+  height: 40,
+);
+
 const kWidthTen = SizedBox(
   width: 10,
 );
@@ -26,3 +30,5 @@ const kHeightFive = SizedBox(
 const Widget kDividerTwo = Divider(
   thickness: 2,
 );
+
+const primaryColor = Color.fromARGB(255, 50, 56, 89);

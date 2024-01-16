@@ -34,6 +34,7 @@ class PhotoUploadBloc extends Bloc<PhotoUploadEvent, PhotoUploadState> {
     });
 
     on<UploadPhoto>((event, emit) async {
+      emit(PhotoUploadingState());
       FormData formData = FormData();
 
       for (int i = 0; i < photos.length; i++) {
@@ -49,6 +50,10 @@ class PhotoUploadBloc extends Bloc<PhotoUploadEvent, PhotoUploadState> {
       CommonResponseModel resp =
           await uploadPhotosDataProvider.uploadPhotos(formData);
       emit(PhotoUploadedState(resp: resp));
+    });
+
+    on<ShowNextPhotoButton>((event, emit) {
+      emit(ShowButtonState(showButton: event.showButton));
     });
   }
 }
