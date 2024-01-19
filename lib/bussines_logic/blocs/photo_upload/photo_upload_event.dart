@@ -23,5 +23,3 @@ class ShowNextPhotoButton extends PhotoUploadEvent {
 }
 
 class UploadPhoto extends PhotoUploadEvent {}
-
-

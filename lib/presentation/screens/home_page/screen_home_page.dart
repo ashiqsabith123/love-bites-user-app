@@ -12,6 +12,7 @@ class ScreenHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<HomePageBloc>().add(FetchMatches());
     return Scaffold(
       bottomNavigationBar: Container(
         color: Colors.black,

@@ -35,6 +35,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:love_bites_user_app/core/constants/constants.dart';
 import 'package:love_bites_user_app/core/textstyles/style.dart';
+import 'package:love_bites_user_app/presentation/screens/home_page/screen_home_page.dart';
 import 'package:love_bites_user_app/presentation/screens/user_preferences_page/widgets/wigdets.dart';
 
 class ScreenDone extends StatelessWidget {
@@ -65,7 +66,12 @@ class ScreenDone extends StatelessWidget {
                   color: Colors.black38),
             ),
             kHeightTwenty,
-            NextButton(onclick: () {})
+            NextButton(onclick: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (builder) {
+                return ScreenHomePage();
+              }));
+            })
           ],
         ),
       )),

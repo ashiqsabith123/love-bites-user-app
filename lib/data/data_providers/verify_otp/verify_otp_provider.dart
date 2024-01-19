@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:love_bites_user_app/data/models/token_response_model/token_response_model.dart';
 import 'package:love_bites_user_app/data/models/verify_otp_model/verify_otp_model.dart';
 import 'package:love_bites_user_app/data/network/dio_network.dart';
@@ -24,6 +23,7 @@ class VerifyOtpDataProvider {
         return TokenResponseModel(
           status: e.response?.statusCode,
           message: e.response?.data['message'],
+          error: e.response?.data['error']
         );
       }
     } catch (e) {

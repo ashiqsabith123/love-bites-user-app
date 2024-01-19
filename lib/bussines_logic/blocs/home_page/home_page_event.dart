@@ -9,4 +9,10 @@ class SelectPage extends HomePageEvent {
   SelectPage({required this.index});
 }
 
-class FetchMatches extends HomePageEvent{}
+class FetchMatches extends HomePageEvent {}
+
+class MakeIntrest extends HomePageEvent {
+  final int recieverID;
+
+  MakeIntrest({required this.recieverID});
+}

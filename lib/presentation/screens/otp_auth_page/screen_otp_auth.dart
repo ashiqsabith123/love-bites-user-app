@@ -49,10 +49,8 @@ class ScreenOtpAuth extends StatelessWidget {
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: [
-                  Lottie.asset(
-                    'assets/animations/Phone-Otp.json',
-                    height: 180,
-                  ),
+                  Lottie.asset('assets/animations/Phone-Otp.json',
+                      height: 180, repeat: false),
                   kHeightTen,
                   BoldText(text: 'Enter your', color: Colors.black),
                   BoldText(text: 'phone number', color: Colors.black),

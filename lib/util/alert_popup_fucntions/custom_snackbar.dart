@@ -1,34 +1,26 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
 
 void showCustomSnackBar(
     BuildContext context, int type, String title, String message) {
-  ContentType types = ContentType.success;
-
   switch (type) {
     case 1:
-      types = ContentType.failure;
+      ElegantNotification.error(
+        width: MediaQuery.sizeOf(context).width - 2,
+        description: Text(message),
+        title: Text(title),
+      ).show(context);
     case 2:
-      types = ContentType.success;
+      ElegantNotification.success(
+        width: MediaQuery.sizeOf(context).width - 2,
+        description: Text(message),
+        title: Text(title),
+      ).show(context);
     case 3:
-      types = ContentType.warning;
-    case 4:
-      types = ContentType.help;
+      ElegantNotification.info(
+        width: MediaQuery.sizeOf(context).width - 2,
+        description: Text(message),
+        title: Text(title),
+      ).show(context);
   }
-  final snackBar = SnackBar(
-    duration: const Duration(milliseconds: 1600),
-    elevation: 0,
-    behavior: SnackBarBehavior.floating,
-    backgroundColor: Colors.transparent,
-    content: AwesomeSnackbarContent(
-      title: title,
-      message: message,
-      messageFontSize: 16,
-      contentType: types,
-    ),
-  );
-
-  ScaffoldMessenger.of(context)
-    ..hideCurrentSnackBar()
-    ..showSnackBar(snackBar);
 }
