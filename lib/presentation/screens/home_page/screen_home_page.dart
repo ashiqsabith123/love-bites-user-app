@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:love_bites_user_app/bussines_logic/blocs/Notifications/notifications_bloc.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/home_page/home_page_bloc.dart';
 import 'package:love_bites_user_app/presentation/screens/home_page/widgets/widgets.dart';
 
@@ -13,6 +14,7 @@ class ScreenHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<HomePageBloc>().add(FetchMatches());
+
     return Scaffold(
       bottomNavigationBar: Container(
         color: Colors.black,

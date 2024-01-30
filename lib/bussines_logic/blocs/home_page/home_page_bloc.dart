@@ -5,8 +5,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:love_bites_user_app/data/data_providers/get_matches/get_matches_data_provider.dart';
 import 'package:love_bites_user_app/data/data_providers/make_interest/make_interest_data_provider.dart';
 import 'package:love_bites_user_app/data/models/common_response_model/common_response_model.dart';
-import 'package:love_bites_user_app/data/models/match_response_model/match_response_model/match_response_model.dart';
-import 'package:love_bites_user_app/data/network/dio_network.dart';
+import 'package:love_bites_user_app/data/models/match_response_model/match_response_model.dart';
+
 import 'package:meta/meta.dart';
 
 part 'home_page_event.dart';
@@ -24,9 +24,10 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     });
 
     on<MakeIntrest>((event, emit) async {
+      emit(MakingIntrest());
       final resp =
           await makeInterstProvider.makeInterest(event.recieverID.toString());
-
+      await Future.delayed(const Duration(seconds: 1));
       emit(MadeIntrest(responseModel: resp));
     });
 
@@ -34,7 +35,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       emit(FetchingMatches());
       resp = await getMathcesProvider.getMatches();
 
-      if (resp.status == 200 && resp.data != null) {
+      if (resp.status == 200 && resp.data?.matchedUsers != null) {
         for (int i = 0; i < resp.data!.matchedUsers!.length; i++) {
           final List<Widget> image = [];
           for (int j = 0;
@@ -54,7 +55,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
           images.add(image);
         }
       }
-      print(resp.toJson());
+
       emit(MatchesFetched(resp: resp, images: images));
     });
   }

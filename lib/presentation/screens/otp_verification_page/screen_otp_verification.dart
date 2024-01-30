@@ -119,12 +119,10 @@ class ScreenOtpVerification extends StatelessWidget {
                         return Align(
                           alignment: Alignment.center,
                           child: LoadingAnimationWidget.inkDrop(
-            
                             // leftDotColor: Colors.black12,
                             // rightDotColor: Colors.blue,
                             color: Color.fromARGB(255, 226, 201, 59),
                             size: 35,
-                          
                           ),
                         );
                       }

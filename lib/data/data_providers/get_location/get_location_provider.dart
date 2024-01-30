@@ -44,6 +44,6 @@ class GetLocationProvider {
 
     return LocationResponseModel(
         state: placemarks[0].administrativeArea,
-        district: placemarks[0].subAdministrativeArea);
+        district: placemarks[0].locality);
   }
 }

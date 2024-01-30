@@ -7,7 +7,6 @@ import 'package:love_bites_user_app/util/api_end_points/api_end_points.dart';
 class VerifyOtpDataProvider {
   final dio = getNetwork();
   Future<TokenResponseModel> verifyOtp(VerifyOtpModel verifyOtpModel) async {
-    await Future.delayed(const Duration(seconds: 2));
     try {
       final response = await dio.post(ApiEndPoints.verifyOtpAndAuth,
           data: verifyOtpModel.toJson());
@@ -21,10 +20,9 @@ class VerifyOtpDataProvider {
     } on DioException catch (e) {
       if (e.response!.statusCode! >= 400) {
         return TokenResponseModel(
-          status: e.response?.statusCode,
-          message: e.response?.data['message'],
-          error: e.response?.data['error']
-        );
+            status: e.response?.statusCode,
+            message: e.response?.data['message'],
+            error: e.response?.data['error']);
       }
     } catch (e) {
       return TokenResponseModel(status: 404, message: 'Something error1 $e');

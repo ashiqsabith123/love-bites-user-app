@@ -24,3 +24,5 @@ final class MadeIntrest extends HomePageState {
 
   MadeIntrest({required this.responseModel});
 }
+
+final class MakingIntrest extends HomePageState {}

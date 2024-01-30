@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "841284743284",
+    "project_id": "lovebites-7bb03",
+    "storage_bucket": "lovebites-7bb03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841284743284:android:7696bd9a0a80872598e121",
+        "android_client_info": {
+          "package_name": "com.example.love_bites_user_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpZml3xkhjGV9xL7t1FTryjUwERrH6Mso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

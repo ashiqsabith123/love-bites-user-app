@@ -9,13 +9,16 @@ class MatchResponseModel {
   @JsonKey(name: 'status')
   int? status;
 
-@JsonKey(name: 'message')
+  @JsonKey(name: 'message')
   String? message;
+
+  @JsonKey(name: 'error')
+  String? error;
 
   @JsonKey(name: 'data')
   Data? data;
 
-  MatchResponseModel({this.status, this.message, this.data});
+  MatchResponseModel({this.status, this.message, this.data, this.error});
 
   factory MatchResponseModel.fromJson(Map<String, dynamic> json) {
     return _$MatchResponseModelFromJson(json);

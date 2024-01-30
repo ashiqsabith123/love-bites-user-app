@@ -19,11 +19,15 @@ class SendOtpDataProvider {
       }
     } on DioException catch (e) {
       print(e.toString());
-      if (e.response!.statusCode! >= 400) {
-        return CommonResponseModel(
-          status: e.response?.statusCode,
-          message: e.response?.data['message'],
-        );
+      if (e.response != null) {
+        if (e.response!.statusCode! >= 400) {
+          return CommonResponseModel(
+              status: e.response?.statusCode,
+              message: e.response?.data['message'],
+              error: e.response?.data['error']);
+        }
+      } else {
+        return CommonResponseModel(status: 404, message: 'Server error');
       }
     } catch (e) {
       return CommonResponseModel(status: 404, message: 'Something error1 $e');

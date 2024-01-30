@@ -1,12 +1,25 @@
+import 'dart:ui';
+
+import 'package:audioplayers/audioplayers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_image_slider/carousel.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+
 import 'package:like_button/like_button.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:lottie/lottie.dart';
+import 'package:love_bites_user_app/bussines_logic/blocs/Notifications/notifications_bloc.dart';
 import 'package:love_bites_user_app/bussines_logic/blocs/home_page/home_page_bloc.dart';
 import 'package:love_bites_user_app/core/constants/constants.dart';
-import 'package:love_bites_user_app/data/models/match_response_model/match_response_model/data.dart';
+import 'package:love_bites_user_app/data/models/match_response_model/data.dart'
+    as match;
+import 'package:love_bites_user_app/data/models/notification_model/data.dart'
+    as intrest;
+
+
 import 'package:love_bites_user_app/util/alert_popup_fucntions/custom_alert.dart';
 
 List<Widget> tabs = [
@@ -17,7 +30,8 @@ List<Widget> tabs = [
   FifthTab()
 ];
 
-Data? matchedUsers;
+match.Data? matchedUsers;
+intrest.Data? notification;
 List<List<Widget>> images = [];
 
 BuildContext? cont;
@@ -27,20 +41,13 @@ int lastIndex = 0;
 
 class ThirdTab extends StatelessWidget {
   ThirdTab({super.key});
-
+  final player = AudioPlayer();
   @override
   Widget build(BuildContext context) {
     cont = context;
     final screenSize = MediaQuery.of(context).size;
     return BlocListener<HomePageBloc, HomePageState>(
-      listener: (context, state) {
-        if (state is MatchesFetched) {
-          if (state.resp.status! >= 400) {
-            showCustomErrorAlertDalog(
-                context, "Error fectching mathches", " Please try again");
-          }
-        }
-      },
+      listener: (context, state) {},
       child: Padding(
         padding: const EdgeInsets.only(
           left: 15,
@@ -92,7 +99,17 @@ class ThirdTab extends StatelessWidget {
                 }
 
                 if (state is MadeIntrest) {
-                  Future.delayed(const Duration(seconds: 1), () {
+                  SmartDialog.show(builder: (context) {
+                    return BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+                      child: Lottie.asset('assets/animations/Love_Beats.json',
+                          repeat: false),
+                    );
+                  });
+
+                  player.play(AssetSource('sounds/bubble.wav'));
+
+                  Future.delayed(const Duration(milliseconds: 800), () {
                     pagecontroller.nextPage(
                       duration: const Duration(milliseconds: 200),
                       curve: Curves.decelerate,
@@ -101,23 +118,13 @@ class ThirdTab extends StatelessWidget {
                     if (lastIndex < matchedUsers!.matchedUsers!.length - 1) {
                       lastIndex++;
                     }
+                    SmartDialog.dismiss();
                   });
                 }
 
                 if (state is MatchesFetched) {
                   if (state.resp.status! >= 400) {
-                    return Column(
-                      children: [
-                        kHeightFourty,
-                        Text(
-                          'Something went wrong',
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700),
-                        )
-                      ],
-                    );
+                    return CustomAlertDailogBox(screenSize: screenSize);
                   } else {
                     matchedUsers = state.resp.data;
                     images = state.images;
@@ -128,7 +135,7 @@ class ThirdTab extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       controller: pagecontroller,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: matchedUsers?.matchedUsers?.length,
+                      itemCount: 100,
                       itemBuilder: (ctx, index) {
                         return Column(
                           children: [
@@ -199,7 +206,7 @@ class ThirdTab extends StatelessWidget {
                                                           .age
                                                           .toString() ??
                                                       "helooo",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 20,
                                                       fontWeight:
@@ -210,7 +217,7 @@ class ThirdTab extends StatelessWidget {
                                             kHeightFive,
                                             Row(
                                               children: [
-                                                Icon(
+                                                const Icon(
                                                   FeatherIcons.mapPin,
                                                   color: Colors.white,
                                                   size: 20,
@@ -225,7 +232,7 @@ class ThirdTab extends StatelessWidget {
                                                           .place
                                                           .toString() ??
                                                       "helooo",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 16,
                                                       fontWeight:
@@ -237,18 +244,29 @@ class ThirdTab extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            LikeButton(
-                                              onTap: (onLikeButtonTapped) {
-                                                cont!.read<HomePageBloc>().add(
-                                                    MakeIntrest(
-                                                        recieverID:
-                                                            matchedUsers!
+                                            BlocBuilder<HomePageBloc,
+                                                HomePageState>(
+                                              builder: (context, state) {
+                                                if (state is MakingIntrest) {
+                                                  return LoadingAnimationWidget
+                                                      .hexagonDots(
+                                                          color: Colors.white,
+                                                          size: 30);
+                                                }
+                                                return LikeButton(
+                                                  onTap: (onLikeButtonTapped) {
+                                                    cont!
+                                                        .read<HomePageBloc>()
+                                                        .add(MakeIntrest(
+                                                            recieverID: matchedUsers!
                                                                 .matchedUsers![
                                                                     lastIndex]
                                                                 .userId!));
-                                                return Future(() => true);
+                                                    return Future(() => true);
+                                                  },
+                                                  size: 35,
+                                                );
                                               },
-                                              size: 35,
                                             ),
                                             IconButton(
                                                 onPressed: () {},
@@ -281,9 +299,229 @@ class SecondTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    context.read<NotificationsBloc>().add(GetNotification());
     return Scaffold(
-        // body: RecipeCard(),
-        );
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
+            child: const Text(
+              'Notifications',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          kHeightTwenty,
+          Expanded(
+              child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: BlocBuilder<NotificationsBloc, NotificationsState>(
+              builder: (context, state) {
+                if (state is NotificationFetchingState) {
+                  return Align(
+                    alignment: AlignmentDirectional.center,
+                    child: LoadingAnimationWidget.waveDots(
+                        color: Colors.black, size: 30),
+                  );
+                }
+                if (state is NotificationFetchedState) {
+                  if (state.resp.data!.notifications == null) {
+                    return Text('No notifications');
+                  }
+                  if (state.resp.data!.notifications==null) {
+                    return CustomAlertDailogBox(screenSize: screenSize);
+                  } else {
+                    notification = state.resp.data;
+                  }
+                }
+                return ListView.separated(
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    //  shrinkWrap: true,
+                    itemBuilder: (contxt, index) {
+                      if (notification?.notifications?[index].status == "P") {
+                        return IntrestRequestTile(
+                          name: notification?.notifications?[index].name,
+                          image: notification?.notifications?[index].image,
+                          time: notification?.notifications?[index].time,
+                        );
+                      } else if (notification?.notifications?[index].status ==
+                          "A") {
+                        return RequestAcceptedTile(
+                          name: notification?.notifications?[index].name,
+                          image: notification?.notifications?[index].image,
+                          time: notification?.notifications?[index].time,
+                        );
+                      }
+                    },
+                    separatorBuilder: (context, index) => Divider(),
+                    itemCount: notification?.notifications?.length ?? 2);
+              },
+            ),
+          ))
+        ],
+      ),
+    );
+  }
+}
+
+class IntrestRequestTile extends StatelessWidget {
+  const IntrestRequestTile(
+      {super.key, required this.name, required this.image, required this.time});
+
+  final String? name;
+  final String? image;
+  final String? time;
+
+  @override
+  Widget build(BuildContext context) {
+    String urls =
+        'https://love-bites-bucket.s3.us-east-2.amazonaws.com/$image.jpeg';
+    return ListTile(
+      leading: ClipOval(
+        child: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          radius: 30,
+          child: Center(
+            child: SizedBox(
+              width: 80, // Double the radius to make it a square container
+              height: 80, // Double the radius to make it a square container
+              child: CachedNetworkImage(
+                colorBlendMode: BlendMode.clear,
+                fit: BoxFit
+                    .cover, // Ensure the image covers the entire square container
+                imageUrl: urls,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    LoadingAnimationWidget.hexagonDots(
+                        color: Colors.black, size: 50),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
+            ),
+          ),
+        ),
+      ),
+      title: Text(
+        name ?? "Unknown",
+        style: TextStyle(fontWeight: FontWeight.w700),
+      ),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Made an intrest on you",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          kHeightFive,
+          Text(
+            time ?? "Unknown",
+            style: TextStyle(fontSize: 10),
+          ),
+        ],
+      ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Column(children: [
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  FeatherIcons.check,
+                  color: Colors.green,
+                )),
+            Text(
+              "Accept",
+              style: TextStyle(fontSize: 7),
+            )
+          ]),
+          Column(
+            children: [
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    FeatherIcons.x,
+                    color: Colors.red,
+                  )),
+              Text(
+                "Decline",
+                style: TextStyle(fontSize: 7),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class RequestAcceptedTile extends StatelessWidget {
+  const RequestAcceptedTile(
+      {super.key, required this.name, required this.image, required this.time});
+
+  final String? name;
+  final String? image;
+  final String? time;
+  @override
+  Widget build(BuildContext context) {
+    String urls =
+        'https://love-bites-bucket.s3.us-east-2.amazonaws.com/$image.jpeg';
+    return ListTile(
+        contentPadding: EdgeInsets.only(right: 20, left: 15),
+        leading: ClipOval(
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 30,
+            child: Center(
+              child: SizedBox(
+                width: 80, // Double the radius to make it a square container
+                height: 80, // Double the radius to make it a square container
+                child: CachedNetworkImage(
+                  colorBlendMode: BlendMode.clear,
+                  fit: BoxFit
+                      .cover, // Ensure the image covers the entire square container
+                  imageUrl: urls,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      LoadingAnimationWidget.hexagonDots(
+                          color: Colors.black, size: 50),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+              ),
+            ),
+          ),
+        ),
+        title: Text(
+          name ?? "Unknown",
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Accepted your interest request",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            kHeightFive,
+            Text(
+              time ?? "Unknown",
+              style: TextStyle(fontSize: 10),
+            ),
+          ],
+        ),
+        trailing: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              FeatherIcons.eye,
+              color: Color.fromARGB(255, 29, 28, 69),
+            )));
   }
 }
 
@@ -301,13 +539,118 @@ class FirstTab extends StatelessWidget {
 }
 
 class FourthTab extends StatelessWidget {
-  const FourthTab({super.key});
+  const FourthTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Center(
-        child: Text('ppppppp'),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
+            child: const Text(
+              'Chats',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          kHeightTwenty,
+          Expanded(
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 204, 204, 204),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                hintText: 'Search...',
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              // Add functionality for the clear/search button if needed
+                            },
+                            icon: const Icon(
+                              FeatherIcons.x,
+                              size: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    kHeightTwenty,
+                    Text('R E C E N T'),
+                    kHeightTen,
+                    Container(
+                      height: screenSize.height / 7,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 10,
+                        itemExtent: 95,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 40,
+                                backgroundImage: NetworkImage(
+                                    'https://images.pexels.com/photos/6948652/pexels-photo-6948652.jpeg?auto=compress&cs=tinysrgb&w=600'),
+                              ),
+                              SizedBox(height: 8),
+                              Text('Ashiq'),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    Text('M E S S A G E S'),
+                    kHeightTen,
+                    ListView.separated(
+                      physics: BouncingScrollPhysics(),
+                      shrinkWrap: true, // Important to add shrinkWrap property
+                      itemCount: 30,
+                      separatorBuilder: (context, index) => Divider(
+                        thickness: 1,
+                      ),
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          contentPadding: EdgeInsets.all(0),
+                          horizontalTitleGap: 10,
+                          title: Text('Ashiq Sabith'),
+                          subtitle: Text('How are you'),
+                          trailing: Column(
+                            children: [Text("9:58")],
+                          ),
+                          leading: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: NetworkImage(
+                                'https://images.pexels.com/photos/4754648/pexels-photo-4754648.jpeg?auto=compress&cs=tinysrgb&w=600'),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

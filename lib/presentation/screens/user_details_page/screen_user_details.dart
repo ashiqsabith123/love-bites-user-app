@@ -66,7 +66,7 @@ class ScreenUserDetails extends StatelessWidget {
                     if (state is LocationFetchedState) {
                       locationController = TextEditingController(
                         text:
-                            '${state.locationResponseModel!.state}, ${state.locationResponseModel!.district}',
+                            '${state.locationResponseModel!.district}, ${state.locationResponseModel!.state}',
                       );
                       validator("", 3, context);
                     }
@@ -103,11 +103,11 @@ class ScreenUserDetails extends StatelessWidget {
                 kHeightTwenty,
                 buildGenderButton(
                   () {
-                    gender = "m";
+                    gender = "M";
                     context.read<UserDetailsBloc>().add(SelectGender(id: 1));
                   },
                   () {
-                    gender = 'f';
+                    gender = 'F';
                     context.read<UserDetailsBloc>().add(SelectGender(id: 2));
                   },
                 ),

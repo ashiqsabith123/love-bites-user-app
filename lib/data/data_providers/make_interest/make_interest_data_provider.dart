@@ -9,11 +9,10 @@ class MakeInterstProvider {
   final dio = getNetwork();
 
   Future<CommonResponseModel> makeInterest(String recierverID) async {
-    await Future.delayed(const Duration(seconds: 2));
     try {
       String? token = await tokenStorage.read(key: 'token');
       final response = await dio.post(
-        ApiEndPoints.getMatches + recierverID,
+        ApiEndPoints.makeInterest + recierverID,
         options: Options(headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
